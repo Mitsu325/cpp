@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 08:15:56 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/12/05 06:01:15 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/12/05 06:07:10 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ $(NAME): $(OBJ_DIR) $(OBJS)
 		@echo "\n$(CYAN)----------------------------------------"
 		@echo "--------------- MAKE EX00 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
-		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp
 		@$(CC) $(CFLAGS) -c $< -o $@
