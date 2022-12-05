@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 17:59:12 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/11/24 18:00:13 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/12/05 06:01:39 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,14 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 RM = rm -rf
 
+# HEADER #
+
+HEADER = Contact.hpp
+
 # FILES #
 
-FILES =
+FILES = main.cpp\
+		Contact.cpp
 
 # COMPILED_SOURCES #
 
@@ -46,21 +51,21 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 		@echo "\n$(CYAN)----------------------------------------"
-		@echo "--------------- MAKE EX00 --------------"
+		@echo "--------------- MAKE EX01 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
-		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ_DIR)%.o: %.cpp
-		$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o: %.cpp $(HEADER)
+		@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-		mkdir $(OBJ_DIR)
+		@mkdir $(OBJ_DIR)
 
 clean:
-		$(RM) $(OBJ_DIR)
+		@$(RM) $(OBJ_DIR)
 
 fclean: clean
-		$(RM) $(NAME)
+		@$(RM) $(NAME)
 		@echo "\n$(MAGENTA)----------------------------------------"
 		@echo "------------- CLEANING DONE ------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
