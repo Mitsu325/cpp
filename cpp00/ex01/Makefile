@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 17:59:12 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/12/05 06:01:39 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/12/05 06:20:21 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,14 @@ RM = rm -rf
 
 # HEADER #
 
-HEADER = Contact.hpp
+HEADER = Contact.hpp\
+		PhoneBook.hpp
 
 # FILES #
 
 FILES = main.cpp\
-		Contact.cpp
+		Contact.cpp\
+		PhoneBook.cpp
 
 # COMPILED_SOURCES #
 
