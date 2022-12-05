@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 08:15:56 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/11/23 08:43:20 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/12/05 06:01:15 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,16 +52,16 @@ $(NAME): $(OBJ_DIR) $(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp
-		$(CC) $(CFLAGS) -c $< -o $@
+		@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-		mkdir $(OBJ_DIR)
+		@mkdir $(OBJ_DIR)
 
 clean:
-		$(RM) $(OBJ_DIR)
+		@$(RM) $(OBJ_DIR)
 
 fclean: clean
-		$(RM) $(NAME)
+		@$(RM) $(NAME)
 		@echo "\n$(MAGENTA)----------------------------------------"
 		@echo "------------- CLEANING DONE ------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
