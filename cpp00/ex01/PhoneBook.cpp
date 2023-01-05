@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 09:21:30 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:02:08 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ void	PhoneBook::add_contact()
 		this->save_contact(new_contact);
 }
 
+std::string	PhoneBook::truncate(std::string str, size_t str_length)
+{
+	if (str.length() > str_length)
+		return (str.substr(0, str_length - 1) + '.');
+	return (str);
+}
+
 void	PhoneBook::search_contact()
 {
 	int	index;
@@ -107,16 +114,16 @@ void	PhoneBook::search_contact()
 	}
 	index = 0;
 	limit = full_contact ? 7 : contact_index;
-	std::cout << std::right <<std::setw(10) << "Index" << "|";
-	std::cout << std::right <<std::setw(10) << "First Name" << "|";
-	std::cout << std::right <<std::setw(10) << "Last Name" << "|";
-	std::cout << std::right <<std::setw(10) << "Nickname" << std::endl;
+	std::cout << std::right << std::setw(10) << "Index" << "|";
+	std::cout << std::right << std::setw(10) << "First Name" << "|";
+	std::cout << std::right << std::setw(10) << "Last Name" << "|";
+	std::cout << std::right << std::setw(10) << "Nickname" << std::endl;
 	while (index <= limit)
 	{
-		std::cout << std::right <<std::setw(10) << index << "|";
-		std::cout << std::right <<std::setw(10) << contact[index].first_name << "|";
-		std::cout << std::right <<std::setw(10) << contact[index].last_name << "|";
-		std::cout << std::right <<std::setw(10) << contact[index].nickname << std::endl;
+		std::cout << std::right << std::setw(10) << index << "|";
+		std::cout << std::right << std::setw(10) << this->truncate(contact[index].first_name, 10) << "|";
+		std::cout << std::right << std::setw(10) << this->truncate(contact[index].last_name, 10) << "|";
+		std::cout << std::right << std::setw(10) << this->truncate(contact[index].nickname, 10) << std::endl;
 		index++;
 	}
 }
