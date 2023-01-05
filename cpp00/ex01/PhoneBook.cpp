@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 07:34:37 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 08:07:07 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,34 @@ void	PhoneBook::save_entry_string(const char *instruction, std::string *var)
 	}
 }
 
+int	PhoneBook::validate_contact(Contact new_contact)
+{
+	if (new_contact.first_name.empty() || new_contact.last_name.empty()
+		|| new_contact.nickname.empty() || new_contact.phone_number.empty()
+		|| new_contact.darkest_secret.empty())
+	{
+		std::cout << "Error add contact: empty field!" << std::endl;
+		return (0);
+	}
+	if (!(new_contact.phone_number.find_first_not_of("+-0123456789")
+		== std::string::npos))
+	{
+		std::cout << "Error add contact: phone number with non-numeric char!"
+			<< std::endl;
+		return (0);
+	}
+	return (1);
+}
+
+void	PhoneBook::save_contact(Contact new_contact)
+{
+	contact.first_name = new_contact.first_name;
+	contact.last_name = new_contact.last_name;
+	contact.nickname = new_contact.nickname;
+	contact.phone_number = new_contact.phone_number;
+	contact.darkest_secret = new_contact.darkest_secret;
+}
+
 void	PhoneBook::add_contact()
 {
 	Contact	new_contact;
@@ -46,6 +74,15 @@ void	PhoneBook::add_contact()
 	this->save_entry_string("Nickname:", &new_contact.nickname);
 	this->save_entry_string("Phone number:", &new_contact.phone_number);
 	this->save_entry_string("Darkest secret:", &new_contact.darkest_secret);
+	if (this->validate_contact(new_contact))
+	{
+		this->save_contact(new_contact);
+		// std::cout << contact.first_name << std::endl;
+		// std::cout << contact.last_name << std::endl;
+		// std::cout << contact.nickname << std::endl;
+		// std::cout << contact.phone_number << std::endl;
+		// std::cout << contact.darkest_secret << std::endl;
+	}
 }
 
 int	PhoneBook::check_option(std::string option)
