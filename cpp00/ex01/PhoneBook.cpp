@@ -6,26 +6,52 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 06:31:38 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 07:34:37 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook()
-{
-	std::cout << "PhoneBook constructor called" << std::endl;
-}
+{}
 
 PhoneBook::~PhoneBook()
+{}
+
+// void	PhoneBook::input_filed()
+// {
+// 	std::cout << "oh no, input failed" << std::endl;
+// 	this->~PhoneBook();
+// 	exit(EXIT_FAILURE);
+// }
+
+void	PhoneBook::save_entry_string(const char *instruction, std::string *var)
 {
-	std::cout << "PhoneBook destructor called" << std::endl;
+	std::cout << instruction << std::endl;
+	std::getline(std::cin, *var);
+	if (!std::cin)
+	{
+		std::cout << "oh no, input failed" << std::endl;
+		this->~PhoneBook();
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	PhoneBook::add_contact()
+{
+	Contact	new_contact;
+
+	this->save_entry_string("First Name:", &new_contact.first_name);
+	this->save_entry_string("Last Name:", &new_contact.last_name);
+	this->save_entry_string("Nickname:", &new_contact.nickname);
+	this->save_entry_string("Phone number:", &new_contact.phone_number);
+	this->save_entry_string("Darkest secret:", &new_contact.darkest_secret);
 }
 
 int	PhoneBook::check_option(std::string option)
 {
 	if (option == "ADD")
-		std::cout << "ADD" << std::endl;
+		this->add_contact();
 	else if (option == "SEARCH")
 		std::cout << "SEARCH" << std::endl;
 	else if (option == "EXIT")
@@ -41,19 +67,9 @@ void	PhoneBook::init_phone_book()
 	std::string	option;
 
 	option.clear();
-	while (check_option(option))
+	while (this->check_option(option))
 	{
-		std::cout << "Enter one command:" << std::endl;
-		std::cin >> option;
+		std::cout << "=================================" << std::endl;
+		this->save_entry_string("Enter one command:", &option);
 	}
-	// std::cout << "First Name: ";
-	// std::cin >> contact.first_name;
-	// std::cout << "Last Name: ";
-	// std::cin >> contact.last_name;
-	// std::cout << "Nickname: ";
-	// std::cin >> contact.nickname;
-	// std::cout << "Phone number: ";
-	// std::cin >> contact.phone_number;
-	// std::cout << "Darkest secret: ";
-	// std::cin >> contact.darkest_secret;
 }
