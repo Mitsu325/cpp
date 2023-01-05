@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:14:42 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/12/05 06:32:21 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 06:23:38 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class PhoneBook
 {
 	private:
-		/* data */
+		int	check_option(std::string option);
 
 	public:
 		Contact	contact;
