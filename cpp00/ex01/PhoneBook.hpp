@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:14:42 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 08:03:28 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 08:53:11 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <stdlib.h>
+# include <iomanip>
 # include "Contact.hpp"
 
 class PhoneBook
@@ -26,9 +27,12 @@ class PhoneBook
 		void	save_entry_string(const char *instruction, std::string *var);
 		int		validate_contact(Contact new_contact);
 		void	save_contact(Contact new_contact);
+		void	search_contact();
 
 	public:
-		Contact	contact;
+		Contact	contact[8];
+		int		contact_index;
+		bool	full_contact;
 		void	init_phone_book();
 		PhoneBook();
 		~PhoneBook();
