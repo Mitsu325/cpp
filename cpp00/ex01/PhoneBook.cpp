@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 19:02:08 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:38:12 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	PhoneBook::add_contact()
 {
 	Contact	new_contact;
 
-	this->save_entry_string("First Name:", &new_contact.first_name);
+	this->save_entry_string("\nFirst Name:", &new_contact.first_name);
 	this->save_entry_string("Last Name:", &new_contact.last_name);
 	this->save_entry_string("Nickname:", &new_contact.nickname);
 	this->save_entry_string("Phone number:", &new_contact.phone_number);
@@ -102,10 +102,25 @@ std::string	PhoneBook::truncate(std::string str, size_t str_length)
 	return (str);
 }
 
+int	PhoneBook::check_contact_range(std::string contact_choice, int limit)
+{
+	int	index;
+
+	index = atoi(contact_choice.c_str());
+	if (index < 0 || index > limit)
+	{
+		std::cout << "* Index out of contact range *" << std::endl;
+		return (1);
+	}
+	contact_choice.clear();
+	return (0);
+}
+
 void	PhoneBook::search_contact()
 {
 	int	index;
 	int	limit;
+	std::string	contact_choice;
 
 	if (contact_index == -1)
 	{
@@ -114,6 +129,7 @@ void	PhoneBook::search_contact()
 	}
 	index = 0;
 	limit = full_contact ? 7 : contact_index;
+	std::cout << std::endl;
 	std::cout << std::right << std::setw(10) << "Index" << "|";
 	std::cout << std::right << std::setw(10) << "First Name" << "|";
 	std::cout << std::right << std::setw(10) << "Last Name" << "|";
@@ -126,6 +142,23 @@ void	PhoneBook::search_contact()
 		std::cout << std::right << std::setw(10) << this->truncate(contact[index].nickname, 10) << std::endl;
 		index++;
 	}
+	contact_choice.clear();
+	save_entry_string("\nChoose a contact index to see all information:", &contact_choice);
+	while (this->check_contact_range(contact_choice, limit))
+	{
+		save_entry_string("Choose a contact index to see all information:", &contact_choice);
+	}
+	index = atoi(contact_choice.c_str());
+	std::cout << "\nFirst Name:" << std::endl;
+	std::cout << contact[index].first_name << std::endl;
+	std::cout << "Last Name:" << std::endl;
+	std::cout << contact[index].last_name << std::endl;
+	std::cout << "Nickname:" << std::endl;
+	std::cout << contact[index].nickname << std::endl;
+	std::cout << "Phone number:" << std::endl;
+	std::cout << contact[index].phone_number << std::endl;
+	std::cout << "Darkest secret:" << std::endl;
+	std::cout << contact[index].darkest_secret << std::endl;
 }
 
 int	PhoneBook::check_option(std::string option)

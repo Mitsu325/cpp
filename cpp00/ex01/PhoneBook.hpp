@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:14:42 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 18:56:28 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:18:11 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class PhoneBook
 		void	save_contact(Contact new_contact);
 		void	search_contact();
 		std::string	truncate(std::string str, size_t width);
+		int		check_contact_range(std::string index, int limit);
 
 	public:
 		Contact	contact[8];
