@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/06 20:03:41 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:28:22 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	PhoneBook::select_contact(int limit)
 		std::cout << std::endl;
 		this->save_entry_string("Choose a contact index to see all information:",
 			&contact_choice);
-		index = atoi(contact_choice.c_str());
+		index = atoi(contact_choice.c_str()) - 1;
 	} while (this->check_contact_range(index, limit));
 	std::cout << "\nFirst Name:" << std::endl;
 	std::cout << contact[index].first_name << std::endl;
@@ -145,7 +145,7 @@ void	PhoneBook::search_contact()
 	this->print_contact("Nickname", 1);
 	while (index <= limit)
 	{
-		std::cout << std::right << std::setw(10) << index << "|";
+		std::cout << std::right << std::setw(10) << index + 1 << "|";
 		this->print_contact(this->truncate(contact[index].first_name, 10), 0);
 		this->print_contact(this->truncate(contact[index].last_name, 10), 0);
 		this->print_contact(this->truncate(contact[index].nickname, 10), 1);
