@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/06 08:09:18 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:03:41 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ PhoneBook::PhoneBook()
 
 PhoneBook::~PhoneBook()
 {}
-
-void	PhoneBook::save_entry_string(const char *instruction, std::string *var)
-{
-	std::cout << instruction << std::endl;
-	std::getline(std::cin, *var);
-	if (!std::cin)
-	{
-		std::cout << "oh no, input failed" << std::endl;
-		this->~PhoneBook();
-		exit(EXIT_FAILURE);
-	}
-}
 
 int	PhoneBook::validate_contact(Contact new_contact)
 {
@@ -105,8 +93,9 @@ void	PhoneBook::select_contact(int limit)
 
 	do {
 		contact_choice.clear();
-		this->save_entry_string("\nChoose a contact index to see all information:",
-		&contact_choice);
+		std::cout << std::endl;
+		this->save_entry_string("Choose a contact index to see all information:",
+			&contact_choice);
 		index = atoi(contact_choice.c_str());
 	} while (this->check_contact_range(index, limit));
 	std::cout << "\nFirst Name:" << std::endl;
@@ -165,6 +154,18 @@ void	PhoneBook::search_contact()
 	this->select_contact(limit);
 }
 
+void	PhoneBook::save_entry_string(const char *instruction, std::string *var)
+{
+	std::cout << instruction << std::endl;
+	std::getline(std::cin, *var);
+	if (!std::cin)
+	{
+		std::cout << "oh no, input failed" << std::endl;
+		this->~PhoneBook();
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	PhoneBook::check_option(std::string option)
 {
 	if (option == "ADD")
@@ -177,16 +178,4 @@ int	PhoneBook::check_option(std::string option)
 		std::cout << "* Valid commands are: ADD, SEARCH, EXIT *" << std::endl;
 	option.clear();
 	return (1);
-}
-
-void	PhoneBook::init_phone_book()
-{
-	std::string	option;
-
-	option.clear();
-	while (this->check_option(option))
-	{
-		std::cout << "=================================" << std::endl;
-		this->save_entry_string("Enter one command:", &option);
-	}
 }

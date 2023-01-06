@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:14:42 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/06 08:06:17 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:52:52 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 class PhoneBook
 {
 	private:
-		int		check_option(std::string option);
+		Contact	contact[8];
+		int		contact_index;
+		bool	full_contact;
 		void	add_contact();
-		void	save_entry_string(const char *instruction, std::string *var);
 		int		validate_contact(Contact new_contact);
 		void	save_contact(Contact new_contact);
 		void	search_contact();
@@ -33,10 +34,8 @@ class PhoneBook
 		int		check_contact_range(int index, int limit);
 
 	public:
-		Contact	contact[8];
-		int		contact_index;
-		bool	full_contact;
-		void	init_phone_book();
+		int		check_option(std::string option);
+		void	save_entry_string(const char *instruction, std::string *var);
 		PhoneBook();
 		~PhoneBook();
 };
