@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/05 19:38:12 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/06 08:09:18 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ PhoneBook::PhoneBook()
 
 PhoneBook::~PhoneBook()
 {}
-
-// void	PhoneBook::input_filed()
-// {
-// 	std::cout << "oh no, input failed" << std::endl;
-// 	this->~PhoneBook();
-// 	exit(EXIT_FAILURE);
-// }
 
 void	PhoneBook::save_entry_string(const char *instruction, std::string *var)
 {
@@ -95,60 +88,27 @@ void	PhoneBook::add_contact()
 		this->save_contact(new_contact);
 }
 
-std::string	PhoneBook::truncate(std::string str, size_t str_length)
+int	PhoneBook::check_contact_range(int index, int limit)
 {
-	if (str.length() > str_length)
-		return (str.substr(0, str_length - 1) + '.');
-	return (str);
-}
-
-int	PhoneBook::check_contact_range(std::string contact_choice, int limit)
-{
-	int	index;
-
-	index = atoi(contact_choice.c_str());
 	if (index < 0 || index > limit)
 	{
 		std::cout << "* Index out of contact range *" << std::endl;
 		return (1);
 	}
-	contact_choice.clear();
 	return (0);
 }
 
-void	PhoneBook::search_contact()
+void	PhoneBook::select_contact(int limit)
 {
-	int	index;
-	int	limit;
 	std::string	contact_choice;
+	int			index;
 
-	if (contact_index == -1)
-	{
-		std::cout << "Phone Book is empty!" << std::endl;
-		return ;
-	}
-	index = 0;
-	limit = full_contact ? 7 : contact_index;
-	std::cout << std::endl;
-	std::cout << std::right << std::setw(10) << "Index" << "|";
-	std::cout << std::right << std::setw(10) << "First Name" << "|";
-	std::cout << std::right << std::setw(10) << "Last Name" << "|";
-	std::cout << std::right << std::setw(10) << "Nickname" << std::endl;
-	while (index <= limit)
-	{
-		std::cout << std::right << std::setw(10) << index << "|";
-		std::cout << std::right << std::setw(10) << this->truncate(contact[index].first_name, 10) << "|";
-		std::cout << std::right << std::setw(10) << this->truncate(contact[index].last_name, 10) << "|";
-		std::cout << std::right << std::setw(10) << this->truncate(contact[index].nickname, 10) << std::endl;
-		index++;
-	}
-	contact_choice.clear();
-	save_entry_string("\nChoose a contact index to see all information:", &contact_choice);
-	while (this->check_contact_range(contact_choice, limit))
-	{
-		save_entry_string("Choose a contact index to see all information:", &contact_choice);
-	}
-	index = atoi(contact_choice.c_str());
+	do {
+		contact_choice.clear();
+		this->save_entry_string("\nChoose a contact index to see all information:",
+		&contact_choice);
+		index = atoi(contact_choice.c_str());
+	} while (this->check_contact_range(index, limit));
 	std::cout << "\nFirst Name:" << std::endl;
 	std::cout << contact[index].first_name << std::endl;
 	std::cout << "Last Name:" << std::endl;
@@ -159,6 +119,50 @@ void	PhoneBook::search_contact()
 	std::cout << contact[index].phone_number << std::endl;
 	std::cout << "Darkest secret:" << std::endl;
 	std::cout << contact[index].darkest_secret << std::endl;
+}
+
+std::string	PhoneBook::truncate(std::string str, size_t str_length)
+{
+	if (str.length() > str_length)
+		return (str.substr(0, str_length - 1) + '.');
+	return (str);
+}
+
+void	PhoneBook::print_contact(std::string field, int endl)
+{
+	std::cout << std::right << std::setw(10) << field;
+	if (endl)
+		std::cout << std::endl;
+	else
+		std::cout << "|";
+}
+
+void	PhoneBook::search_contact()
+{
+	int	index;
+	int	limit;
+
+	if (contact_index == -1)
+	{
+		std::cout << "Phone Book is empty!" << std::endl;
+		return ;
+	}
+	index = 0;
+	limit = full_contact ? 7 : contact_index;
+	std::cout << std::endl;
+	this->print_contact("Index", 0);
+	this->print_contact("First Name", 0);
+	this->print_contact("Last Name", 0);
+	this->print_contact("Nickname", 1);
+	while (index <= limit)
+	{
+		std::cout << std::right << std::setw(10) << index << "|";
+		this->print_contact(this->truncate(contact[index].first_name, 10), 0);
+		this->print_contact(this->truncate(contact[index].last_name, 10), 0);
+		this->print_contact(this->truncate(contact[index].nickname, 10), 1);
+		index++;
+	}
+	this->select_contact(limit);
 }
 
 int	PhoneBook::check_option(std::string option)
