@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:42:11 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/07 17:16:30 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:30:00 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,21 @@ void	Account::displayAccountsInfos( void )
 	std::cout << "accounts:" << Account::getNbAccounts() << ";total:"
 		<< Account::getTotalAmount() << ";deposits:" << Account::getNbDeposits()
 		<< ";withdrawals:" << Account::getNbWithdrawals() << std::endl;
+	return ;
+}
+
+void	Account::makeDeposit( int deposit )
+{
+	int	previous_amount = this->_amount;
+
+	this->_amount += deposit;
+	this->_nbDeposits++;
+	Account::_totalAmount += deposit;
+	Account::_totalNbDeposits++;
+	Account::_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex << ";p_amount:"
+		<< previous_amount << ";deposit:" << deposit << ";amount:"
+		<< this->_amount << ";nb_deposits:" << this->_nbDeposits << std::endl;
 	return ;
 }
 
