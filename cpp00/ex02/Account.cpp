@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:42:11 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/07 17:30:00 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:41:56 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,37 @@ void	Account::makeDeposit( int deposit )
 		<< previous_amount << ";deposit:" << deposit << ";amount:"
 		<< this->_amount << ";nb_deposits:" << this->_nbDeposits << std::endl;
 	return ;
+}
+
+bool	Account::makeWithdrawal( int withdrawal )
+{
+	int	previous_amount = this->_amount;
+
+	this->_amount -= withdrawal;
+	if (checkAmount())
+	{
+		this->_amount += withdrawal;
+		Account::_displayTimestamp();
+		std::cout << "index:" << this->_accountIndex << ";p_amount:"
+			<< previous_amount << ";withdrawal:refused" << std::endl;
+		return (false);
+	}
+	this->_nbWithdrawals++;
+	Account::_totalAmount -= withdrawal;
+	Account::_totalNbWithdrawals++;
+	Account::_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex << ";p_amount:"
+		<< previous_amount << ";withdrawal:" << withdrawal << ";amount:"
+		<< this->_amount << ";nb_withdrawals:" << this->_nbWithdrawals
+		<< std::endl;
+	return (true);
+}
+
+int	Account::checkAmount( void ) const
+{
+	if (this->_amount < 0)
+		return (1);
+	return (0);
 }
 
 void	Account::displayStatus( void ) const
