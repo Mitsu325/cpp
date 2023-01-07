@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:42:11 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/07 16:38:40 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:16:30 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ Account::Account(int initial_deposit)
 	this->_nbDeposits = 0;
 	this->_nbWithdrawals = 0;
 	Account::_nbAccounts++;
-	this->_displayTimestamp();
+	Account::_totalAmount += this->_amount;
+	Account::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount
 		<< ";created" << std::endl;
 	return ;
@@ -34,21 +35,47 @@ Account::Account(int initial_deposit)
 
 Account::~Account()
 {
-	this->_displayTimestamp();
+	Account::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount
 		<< ";closed" << std::endl;
 	return ;
 }
 
+int	Account::getNbAccounts( void )
+{
+	return Account::_nbAccounts;
+}
+
+int	Account::getTotalAmount( void )
+{
+	return Account::_totalAmount;
+}
+
+int	Account::getNbDeposits( void )
+{
+	return Account::_totalNbDeposits;
+}
+
+int	Account::getNbWithdrawals( void )
+{
+	return Account::_totalNbWithdrawals;
+}
+
 void	Account::displayAccountsInfos( void )
 {
-	std::cout << "accounts:" << std::endl;
+	Account::_displayTimestamp();
+	std::cout << "accounts:" << Account::getNbAccounts() << ";total:"
+		<< Account::getTotalAmount() << ";deposits:" << Account::getNbDeposits()
+		<< ";withdrawals:" << Account::getNbWithdrawals() << std::endl;
 	return ;
 }
 
 void	Account::displayStatus( void ) const
 {
-	std::cout << "status:" << std::endl;
+	Account::_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount
+		<< ";deposits:" << this->_nbDeposits << ";withdrawals:"
+		<< this->_nbWithdrawals << std::endl;
 	return ;
 }
 
