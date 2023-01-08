@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 17:30:33 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/08 17:47:41 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:35:30 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ class Weapon
 		std::string	type;
 
 	public:
-		Weapon();
-		~Weapon();
-		const std::string&	getType();
+		Weapon(std::string weapon_type);
+		~Weapon(void);
+		const std::string&	getType(void) const;
 		void	setType(std::string new_type);
 };
 
