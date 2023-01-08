@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 09:57:38 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/08 13:18:23 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:32:18 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ class Zombie
 		std::string	name;
 
 	public:
-		Zombie();
-		~Zombie();
+		Zombie(void);
+		~Zombie(void);
 
-		void	announce(void);
+		void	announce(void) const;
 		void	set_name(std::string name);
 };
 
-Zombie* zombieHorde( int N, std::string name );
+Zombie* zombieHorde(int N, std::string name);
 
 #endif
