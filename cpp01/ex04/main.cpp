@@ -6,51 +6,39 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 20:59:07 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/10 22:46:34 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:43:28 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FileReplace.hpp"
-#include <fstream>
-#include <sstream>
 
-int	main()
+int	main(int argc, char **argv)
 {
-	std::fstream		fs_in;
-	std::fstream		fs_out;
-	std::stringstream	buffer;
-	std::string			content;
-	std::string			new_content;
-	std::string			s1 = "Lorem Ipsum";
-	std::string			s2 = "This is example";
-	size_t				found = 0;
-	size_t				start = 0;
-	size_t				end = 0;
+	FileReplace	*file_replace;
+	std::string	content;
 
-	fs_in.open("test", std::fstream::in);
-	buffer << fs_in.rdbuf();
-	content = buffer.str();
-	fs_in.close();
-	found = content.find(s1, found);
-	end = found;
-	new_content = content.substr(start, end - start);
-	new_content += s2;
-	start = found + s1.length();
-	while (true)
+	if (argc != 4)
 	{
-		found = content.find(s1, found + s1.length());
-		if (found == std::string::npos)
-		{
-			new_content += content.substr(start);
-			break;
-		}
-		end = found;
-		new_content += content.substr(start, end - start);
-		new_content += s2;
-		start = found + s1.length();
+		std::cout << "Wrong number of arguments" << std::endl;
+		std::cout << "Enter the commands: ./file_replace <filename> <s1> <s2>"
+			<< std::endl;
+		return (1);
 	}
-	fs_out.open("test.replace", std::fstream::out);
-	fs_out << new_content;
-	fs_out.close();
+	file_replace = new FileReplace(argv[1], argv[2], argv[3]);
+	if (file_replace->getFileContent())
+	{
+		delete file_replace;
+		file_replace = NULL;
+		return (1);
+	}
+	file_replace->allStringReplace();
+	if (file_replace->writeFile())
+	{
+		delete file_replace;
+		file_replace = NULL;
+		return (1);
+	}
+	delete file_replace;
+	file_replace = NULL;
 	return (0);
 }
