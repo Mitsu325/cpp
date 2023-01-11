@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 01:17:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/11 02:42:38 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/11 02:48:01 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,25 @@ Harl::~Harl(void)
 
 void	Harl::debug(void)
 {
+	std::cout << "[ DEBUG ]" << std::endl;
 	std::cout << DEBUG_MSG << std::endl;
 }
 
 void	Harl::info(void)
 {
+	std::cout << "[ INFO ]" << std::endl;
 	std::cout << INFO_MSG << std::endl;
 }
 
 void	Harl::warning(void)
 {
+	std::cout << "[ WARNING ]" << std::endl;
 	std::cout << WARNING_MSG << std::endl;
 }
 
 void	Harl::error(void)
 {
+	std::cout << "[ ERROR ]" << std::endl;
 	std::cout << ERROR_MSG << std::endl;
 }
 
