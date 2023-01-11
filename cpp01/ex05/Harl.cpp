@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 01:17:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/11 02:48:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/11 03:20:25 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Harl::Harl(void)
 {
-	std::cout << "Harl destructor" << std::endl;
+	std::cout << "Harl constructor" << std::endl;
 }
 
 
