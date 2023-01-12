@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 20:59:18 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/11 00:42:41 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:05:12 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	FileReplace::allStringReplace()
 	size_t	start_pos = 0;
 	size_t	end_pos = 0;
 
+	if (this->_s1.empty())
+	{
+		this->replaced_content = this->content;
+		return ;
+	}
 	found = this->content.find(this->_s1, found);
 	if (found == std::string::npos)
 	{
