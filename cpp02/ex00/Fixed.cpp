@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 21:52:46 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/19 22:15:56 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/19 22:27:35 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ int	Fixed::getRawBits(void) const
 void	Fixed::setRawBits(int const raw)
 {
 	std::cout << __FUNCTION__ << " member function called" << std::endl;
-	this->rawBits = raw << frac_bits;
+	this->rawBits = raw;
 }
