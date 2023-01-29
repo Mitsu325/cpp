@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/22 20:03:30 by pmitsuko          #+#    #+#              #
-#    Updated: 2023/01/28 20:07:51 by pmitsuko         ###   ########.fr        #
+#    Updated: 2023/01/29 15:20:26 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ HEADER = Animal.hpp\
 		Dog.hpp\
 		Cat.hpp\
 		WrongAnimal.hpp\
-		WrongCat.hpp
+		WrongCat.hpp\
+		Brain.hpp
 
 # FILES #
 
@@ -46,7 +47,8 @@ FILES = main.cpp\
 		Dog.cpp\
 		Cat.cpp\
 		WrongAnimal.cpp\
-		WrongCat.cpp
+		WrongCat.cpp\
+		Brain.cpp
 
 # COMPILED_SOURCES #
 
@@ -59,7 +61,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 		@echo "\n$(CYAN)----------------------------------------"
-		@echo "--------------- MAKE EX00 --------------"
+		@echo "--------------- MAKE EX01 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
 		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
