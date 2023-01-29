@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:50:45 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/28 22:46:38 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:59:23 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ Animal::~Animal(void)
 
 Animal&	Animal::operator=(Animal const &obj)
 {
+	std::cout << "Animal assignment operator called" << std::endl;
 	this->type = obj.type;
 	return (*this);
 }

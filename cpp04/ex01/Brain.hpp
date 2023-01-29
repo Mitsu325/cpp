@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 21:06:35 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/29 18:03:25 by pmitsuko         ###   ########.fr       */
+/*   Created: 2023/01/29 14:29:19 by pmitsuko          #+#    #+#             */
+/*   Updated: 2023/01/29 15:17:08 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef CAT_H
+#ifndef BRAIN_H
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+# include "iostream"
+# include "string"
 
-class Cat: public Animal
+# define IDEA_SIZE 100
+
+class Brain
 {
 	private:
-		Brain*	brain;
+		int	idea_index;
+
+	protected:
+		std::string	ideas[IDEA_SIZE];
 
 	public:
-		Cat(void);
-		Cat(Cat const &obj);
-		~Cat(void);
-		Cat&	operator=(Cat const &obj);
+		Brain(void);
+		Brain(Brain const &obj);
+		~Brain(void);
+		Brain&	operator=(Brain const &obj);
 
-		void	makeSound(void) const;
-		void	printIdeas(void) const;
-		void	addIdea(std::string idea);
-		Brain*	getBrain(void) const;
+		std::string	getIdea(int index) const;
+		void		setIdea(std::string idea);
 };
 
-std::ostream&	operator<<(std::ostream &stream, Cat const &obj);
+std::ostream&	operator<<(std::ostream &stream, Brain const &obj);
 
 #endif
