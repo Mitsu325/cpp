@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:06:35 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/29 18:03:25 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:59:28 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Cat: public Animal
 		Cat(Cat const &obj);
 		~Cat(void);
 		Cat&	operator=(Cat const &obj);
+		Animal&	operator=(Animal const &obj);
 
 		void	makeSound(void) const;
 		void	printIdeas(void) const;

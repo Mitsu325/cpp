@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:06:35 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/29 17:43:56 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:59:40 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Dog: public Animal
 		Dog(Dog const &obj);
 		~Dog(void);
 		Dog&	operator=(Dog const &obj);
+		Animal&	operator=(Animal const &obj);
 
 		void	makeSound(void) const;
 		void	printIdeas(void) const;

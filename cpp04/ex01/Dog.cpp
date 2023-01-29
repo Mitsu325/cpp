@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:08:22 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/29 18:26:20 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:37:08 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ Dog::Dog(Dog const &obj): Animal(obj)
 {
 	std::cout << this->getType() << " copy constructor called" << std::endl;
 	*this = obj;
-	this->brain = new Brain();
-	*this->brain = *(obj.getBrain());
 	return ;
 }
 
@@ -45,6 +43,14 @@ Dog&	Dog::operator=(Dog const &obj)
 	return (*this);
 }
 
+Animal&	Dog::operator=(Animal const &obj)
+{
+	std::cout << "Animal Dog assignment operator called" << std::endl;
+	this->type = obj.getType();
+	*this->brain = *(obj.getBrain());
+	return (*this);
+}
+
 void	Dog::makeSound(void) const
 {
 	std::cout << "Woof, Woof, Woof..." << std::endl;
@@ -55,6 +61,7 @@ void	Dog::printIdeas(void) const
 	int	i;
 
 	i = 0;
+	std::cout << "Brain: " << &this->brain << std::endl;
 	while (!this->brain->getIdea(i).empty())
 	{
 		std::cout << this->brain->getIdea(i) << std::endl;
