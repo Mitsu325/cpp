@@ -1,0 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/28 21:06:35 by pmitsuko          #+#    #+#             */
+/*   Updated: 2023/01/29 19:57:44 by pmitsuko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
+#ifndef CAT_H
+
+# include "AAnimal.hpp"
+# include "Brain.hpp"
+
+class Cat: public AAnimal
+{
+	private:
+		Brain*	brain;
+
+	public:
+		Cat(void);
+		Cat(Cat const &obj);
+		~Cat(void);
+		Cat&	operator=(Cat const &obj);
+		AAnimal&	operator=(AAnimal const &obj);
+
+		void	makeSound(void) const;
+		void	printIdeas(void) const;
+		void	addIdea(std::string idea);
+		Brain*	getBrain(void) const;
+};
+
+std::ostream&	operator<<(std::ostream &stream, Cat const &obj);
+
+#endif
