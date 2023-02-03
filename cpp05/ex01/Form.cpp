@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:48:34 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/02/03 20:02:03 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:17:31 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,22 @@ int	Form::getGradeExecute(void) const
 	return (this->_grade_execute);
 }
 
+void	Form::beSigned(Bureaucrat& bureaucrat)
+{
+	if (bureaucrat.getGrade() > this->getGradeSign())
+	{
+		throw Form::GradeTooLowException();
+	}
+	else if (this->getSign())
+	{
+		throw Form::AlreadySignedException();
+	}
+	else
+	{
+		this->_is_signed = true;
+	}
+}
+
 const char* Form::GradeTooHighException::what() const throw()
 {
 	return ("* Grade too high *");
@@ -87,4 +103,18 @@ const char* Form::GradeTooHighException::what() const throw()
 const char* Form::GradeTooLowException::what() const throw()
 {
 	return ("* Grade too low *");
+}
+
+const char* Form::AlreadySignedException::what() const throw()
+{
+	return ("* Form already signed *");
+}
+
+std::ostream&	operator<<(std::ostream &stream, Form const &obj)
+{
+	stream << obj.getName() << ", Form grade required to sign it is "
+		<< obj.getGradeSign() << " and grade required to execute it is "
+		<< obj.getGradeExecute() << "."
+		<< std::endl;
+	return (stream);
 }
