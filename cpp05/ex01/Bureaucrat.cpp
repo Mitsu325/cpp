@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:26:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/02/02 20:46:52 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:22:05 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,22 @@ void	Bureaucrat::decrementGrade(void)
 	{
 		this->_grade++;
 	}
+}
+
+void	Bureaucrat::signForm(Form & form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName()
+			<< std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << this->getName() << " couldn’t sign " << form.getName()
+			<< " because " << e.what() << '\n';
+	}
+
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
