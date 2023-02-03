@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 08:34:25 by pmitsuko          #+#    #+#              #
-#    Updated: 2023/02/02 08:35:02 by pmitsuko         ###   ########.fr        #
+#    Updated: 2023/02/03 19:46:30 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,14 @@ RM = rm -rf
 
 # HEADER #
 
-HEADER = Bureaucrat.hpp
+HEADER = Bureaucrat.hpp\
+		Form.hpp
 
 # FILES #
 
 FILES = main.cpp\
-		Bureaucrat.cpp
+		Bureaucrat.cpp\
+		Form.cpp
 
 # COMPILED_SOURCES #
 
@@ -51,7 +53,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 		@echo "\n$(CYAN)----------------------------------------"
-		@echo "--------------- MAKE EX00 --------------"
+		@echo "--------------- MAKE EX01 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
 		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
