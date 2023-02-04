@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 11:29:41 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/02/04 11:53:45 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:11:00 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ std::string	AForm::getName(void) const
 bool	AForm::getSign(void) const
 {
 	return (this->_is_signed);
+}
+
+void	AForm::setSign(bool sign)
+{
+	this->_is_signed = sign;
+	return ;
 }
 
 int	AForm::getGradeSign(void) const

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 11:28:21 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/02/04 11:51:23 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:10:24 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ class AForm
 
 		std::string	getName(void) const;
 		bool		getSign(void) const;
+		void		setSign(bool sign);
 		int			getGradeSign(void) const;
 		int			getGradeExecute(void) const;
 		void		beSigned(Bureaucrat& bureaucrat);
 
+		virtual std::string	getTarget(void) const = 0;
 		virtual void	execute(Bureaucrat& bureaucrat) const = 0;
 
 		class GradeTooHighException: public std::exception
