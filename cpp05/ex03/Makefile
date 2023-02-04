@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 08:34:25 by pmitsuko          #+#    #+#              #
-#    Updated: 2023/02/04 11:27:24 by pmitsuko         ###   ########.fr        #
+#    Updated: 2023/02/04 15:34:13 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ HEADER = Bureaucrat.hpp\
 		AForm.hpp\
 		ShrubberyCreationForm.hpp\
 		RobotomyRequestForm.hpp\
-		PresidentialPardonForm.hpp
+		PresidentialPardonForm.hpp\
+		Intern.hpp
 
 # FILES #
 
@@ -46,7 +47,8 @@ FILES = main.cpp\
 		AForm.cpp\
 		ShrubberyCreationForm.cpp\
 		RobotomyRequestForm.cpp\
-		PresidentialPardonForm.cpp
+		PresidentialPardonForm.cpp\
+		Intern.cpp
 
 # COMPILED_SOURCES #
 
@@ -59,7 +61,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 		@echo "\n$(CYAN)----------------------------------------"
-		@echo "--------------- MAKE EX02 --------------"
+		@echo "--------------- MAKE EX03 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
 		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
