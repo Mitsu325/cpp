@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:29:20 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/02/08 08:40:12 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/02/08 08:43:35 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,7 +329,7 @@ void	Convert::printDouble(void) const
 	{
 		std::cout << this->getDouble();
 		if ((this->_d - static_cast<int>(this->_d)) == 0)
-			std::cout << ".0'";
+			std::cout << ".0";
 	}
 	std::cout << std::endl;
 }
