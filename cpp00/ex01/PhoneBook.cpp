@@ -6,31 +6,31 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:17:15 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/06 20:28:22 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/02/28 20:51:20 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook()
+PhoneBook::PhoneBook(void)
 {
 	contact_index = -1;
 	full_contact = false;
 }
 
-PhoneBook::~PhoneBook()
+PhoneBook::~PhoneBook(void)
 {}
 
 int	PhoneBook::validate_contact(Contact new_contact)
 {
-	if (new_contact.first_name.empty() || new_contact.last_name.empty()
-		|| new_contact.nickname.empty() || new_contact.phone_number.empty()
-		|| new_contact.darkest_secret.empty())
+	if (new_contact.getFirstName().empty() || new_contact.getLastName().empty()
+		|| new_contact.getNickname().empty() || new_contact.getPhoneNumber().empty()
+		|| new_contact.getDarkestSecret().empty())
 	{
 		std::cout << "Error add contact: empty field!" << std::endl;
 		return (0);
 	}
-	if (!(new_contact.phone_number.find_first_not_of("+-0123456789")
+	if (!(new_contact.getPhoneNumber().find_first_not_of("+-0123456789")
 		== std::string::npos))
 	{
 		std::cout << "Error add contact: phone number with non-numeric char!"
@@ -51,27 +51,22 @@ void	PhoneBook::save_contact(Contact new_contact)
 	}
 	else
 		contact_index++;
-	contact[contact_index].first_name.clear();
-	contact[contact_index].first_name = new_contact.first_name;
-	contact[contact_index].last_name.clear();
-	contact[contact_index].last_name = new_contact.last_name;
-	contact[contact_index].nickname.clear();
-	contact[contact_index].nickname = new_contact.nickname;
-	contact[contact_index].phone_number.clear();
-	contact[contact_index].phone_number = new_contact.phone_number;
-	contact[contact_index].darkest_secret.clear();
-	contact[contact_index].darkest_secret = new_contact.darkest_secret;
+	contact[contact_index].setFirstName(new_contact.getFirstName());
+	contact[contact_index].setLastName(new_contact.getLastName());
+	contact[contact_index].setNickname(new_contact.getNickname());
+	contact[contact_index].setPhoneNumber(new_contact.getPhoneNumber());
+	contact[contact_index].setDarkestSecret(new_contact.getDarkestSecret());
 }
 
 void	PhoneBook::add_contact()
 {
 	Contact	new_contact;
 
-	this->save_entry_string("\nFirst Name:", &new_contact.first_name);
-	this->save_entry_string("Last Name:", &new_contact.last_name);
-	this->save_entry_string("Nickname:", &new_contact.nickname);
-	this->save_entry_string("Phone number:", &new_contact.phone_number);
-	this->save_entry_string("Darkest secret:", &new_contact.darkest_secret);
+	new_contact.setFirstName(this->input_str("\nFirst Name:"));
+	new_contact.setLastName(this->input_str("Last Name:"));
+	new_contact.setNickname(this->input_str("Nickname:"));
+	new_contact.setPhoneNumber(this->input_str("Phone number:"));
+	new_contact.setDarkestSecret(this->input_str("Darkest secret:"));
 	if (this->validate_contact(new_contact))
 		this->save_contact(new_contact);
 }
@@ -94,20 +89,19 @@ void	PhoneBook::select_contact(int limit)
 	do {
 		contact_choice.clear();
 		std::cout << std::endl;
-		this->save_entry_string("Choose a contact index to see all information:",
-			&contact_choice);
+		contact_choice = this->input_str("Choose a contact index to see all information:");
 		index = atoi(contact_choice.c_str()) - 1;
 	} while (this->check_contact_range(index, limit));
 	std::cout << "\nFirst Name:" << std::endl;
-	std::cout << contact[index].first_name << std::endl;
+	std::cout << contact[index].getFirstName() << std::endl;
 	std::cout << "Last Name:" << std::endl;
-	std::cout << contact[index].last_name << std::endl;
+	std::cout << contact[index].getLastName() << std::endl;
 	std::cout << "Nickname:" << std::endl;
-	std::cout << contact[index].nickname << std::endl;
+	std::cout << contact[index].getNickname() << std::endl;
 	std::cout << "Phone number:" << std::endl;
-	std::cout << contact[index].phone_number << std::endl;
+	std::cout << contact[index].getPhoneNumber() << std::endl;
 	std::cout << "Darkest secret:" << std::endl;
-	std::cout << contact[index].darkest_secret << std::endl;
+	std::cout << contact[index].getDarkestSecret() << std::endl;
 }
 
 std::string	PhoneBook::truncate(std::string str, size_t str_length)
@@ -146,24 +140,27 @@ void	PhoneBook::search_contact()
 	while (index <= limit)
 	{
 		std::cout << std::right << std::setw(10) << index + 1 << "|";
-		this->print_contact(this->truncate(contact[index].first_name, 10), 0);
-		this->print_contact(this->truncate(contact[index].last_name, 10), 0);
-		this->print_contact(this->truncate(contact[index].nickname, 10), 1);
+		this->print_contact(this->truncate(contact[index].getFirstName(), 10), 0);
+		this->print_contact(this->truncate(contact[index].getLastName(), 10), 0);
+		this->print_contact(this->truncate(contact[index].getNickname(), 10), 1);
 		index++;
 	}
 	this->select_contact(limit);
 }
 
-void	PhoneBook::save_entry_string(const char *instruction, std::string *var)
+std::string	PhoneBook::input_str(const char *instruction)
 {
+	std::string	input;
+
 	std::cout << instruction << std::endl;
-	std::getline(std::cin, *var);
+	std::getline(std::cin, input);
 	if (!std::cin)
 	{
 		std::cout << "oh no, input failed" << std::endl;
 		this->~PhoneBook();
 		exit(EXIT_FAILURE);
 	}
+	return (input);
 }
 
 int	PhoneBook::check_option(std::string option)
@@ -178,4 +175,16 @@ int	PhoneBook::check_option(std::string option)
 		std::cout << "* Valid commands are: ADD, SEARCH, EXIT *" << std::endl;
 	option.clear();
 	return (1);
+}
+
+void	PhoneBook::loop_phone()
+{
+	std::string	option;
+
+	option.clear();
+	while (this->check_option(option))
+	{
+		std::cout << "=================================" << std::endl;
+		option = this->input_str("Enter one command:");
+	}
 }
