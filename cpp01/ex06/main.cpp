@@ -6,20 +6,17 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 01:17:29 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/11 03:22:43 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:59:20 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	Harl	harl;
 
-	harl.complain("DEBUG");
-	// harl.complain("INFO");
-	// harl.complain("WARNING");
-	// harl.complain("ERROR");
-	// harl.complain("error");
+	if (argc == 2)
+		harl.complain(argv[1]);
 	return (0);
 }

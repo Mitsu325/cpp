@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 01:17:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/01/11 03:19:40 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:59:52 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,9 @@ int	Harl::resolveOption(std::string level)
 	std::string	option[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int			i = 0;
 
-	while (i < 4)
-	{
-		if (level == option[i])
-			return (i);
+	while (i < 4 && level != option[i])
 		i++;
-	}
-	return (-1);
+	return (i);
 }
 
 void	Harl::complain(std::string level)
@@ -72,19 +68,13 @@ void	Harl::complain(std::string level)
 	{
 		case DEBUG:
 			this->debug();
-			this->info();
-			this->warning();
-			this->error();
-			break;
+			// fall through
 		case INFO:
 			this->info();
-			this->warning();
-			this->error();
-			break;
+			// fall through
 		case WARNING:
 			this->warning();
-			this->error();
-			break;
+			// fall through
 		case ERROR:
 			this->error();
 			break;
