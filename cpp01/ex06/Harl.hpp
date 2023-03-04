@@ -37,16 +37,17 @@ typedef enum e_option
 class Harl
 {
 	private:
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
-	void	no_option(void);
-	int		resolveOption(std::string level);
+		void	debug(void);
+		void	info(void);
+		void	warning(void);
+		void	error(void);
+		void	no_option(void);
+		int		resolveOption(std::string level);
 
 	public:
 		Harl(void);
 		~Harl(void);
+
 		void	complain(std::string level);
 };
 

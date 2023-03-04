@@ -18,5 +18,10 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 		harl.complain(argv[1]);
+	else
+	{
+		std::cout << "Wrong number of arguments" << std::endl;
+		std::cout << "Enter the commands: ./harlFilter <level>" << std::endl;
+	}
 	return (0);
 }
