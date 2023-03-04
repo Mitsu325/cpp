@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	FileReplace	*file_replace;
-	std::string	content;
 
 	if (argc != 4)
 	{

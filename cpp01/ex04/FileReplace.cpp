@@ -13,7 +13,11 @@
 #include "FileReplace.hpp"
 
 FileReplace::FileReplace(char* filename, char* s1, char* s2):
-	_filename(filename), _s1(s1), _s2(s2)
+	_filename(filename),
+	_s1(s1),
+	_s2(s2),
+	_content(""),
+	_replaced_content("")
 {
 	std::cout << "FileReplace constructor" << std::endl;
 }
@@ -36,7 +40,7 @@ int	FileReplace::getFileContent()
 		return (1);
 	}
 	buffer << fs_in.rdbuf();
-	this->content = buffer.str();
+	this->_content = buffer.str();
 	fs_in.close();
 	return (0);
 }
@@ -49,22 +53,22 @@ void	FileReplace::allStringReplace()
 
 	if (this->_s1.empty())
 	{
-		this->replaced_content = this->content;
+		this->_replaced_content = this->_content;
 		return ;
 	}
 	while (true)
 	{
-		found = this->content.find(this->_s1, found);
+		found = this->_content.find(this->_s1, found);
 		if (found == std::string::npos)
 		{
-			this->replaced_content += this->content.substr(start_pos);
+			this->_replaced_content += this->_content.substr(start_pos);
 			break;
 		}
 		end_pos = found;
 		found = found + this->_s1.length();
-		this->replaced_content += this->content.substr(start_pos,
+		this->_replaced_content += this->_content.substr(start_pos,
 			end_pos - start_pos);
-		this->replaced_content += this->_s2;
+		this->_replaced_content += this->_s2;
 		start_pos = found;
 	}
 }
@@ -83,7 +87,7 @@ int	FileReplace::writeFile()
 			<< std::endl;
 		return (1);
 	}
-	fs_out << this->replaced_content;
+	fs_out << this->_replaced_content;
 	fs_out.close();
 	return (0);
 }

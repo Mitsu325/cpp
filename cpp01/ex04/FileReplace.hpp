@@ -22,16 +22,16 @@
 class FileReplace
 {
 	private:
-		char*	_filename;
+		char*		_filename;
 		std::string	_s1;
 		std::string	_s2;
+		std::string	_content;
+		std::string	_replaced_content;
 
 	public:
-		std::string	content;
-		std::string	replaced_content;
-
 		FileReplace(char* filename, char* s1, char* s2);
 		~FileReplace(void);
+
 		int		getFileContent();
 		void	allStringReplace();
 		int		writeFile();
