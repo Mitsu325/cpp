@@ -30,12 +30,12 @@ class Harl
 	void	warning(void);
 	void	error(void);
 	void	no_option(void);
+	int		resolveOption(std::string level);
 
 	public:
 		Harl(void);
 		~Harl(void);
 
-		int		resolveOption(std::string level);
 		void	complain(std::string level);
 };
 
