@@ -12,7 +12,8 @@
 
 #include "Weapon.hpp"
 
-Weapon::Weapon(std::string weapon_type): type(weapon_type)
+Weapon::Weapon(std::string weapon_type):
+	type(weapon_type)
 {
 	std::cout << "Weapon constructor" << std::endl;
 }
