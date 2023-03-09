@@ -18,7 +18,7 @@
 class Fixed
 {
 	private:
-		int	rawBits;
+		int					rawBits;
 		static const int	frac_bits = 8;
 
 	public:
@@ -27,8 +27,8 @@ class Fixed
 		Fixed(Fixed const &fixed);
 		Fixed&	operator=(Fixed const &fixed);
 
-		int getRawBits(void) const;
-		void setRawBits(int const raw);
+		int		getRawBits(void) const;
+		void	setRawBits(int const raw);
 };
 
 #endif
