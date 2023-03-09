@@ -28,8 +28,8 @@ class Point
 		Point(Point const &point);
 		Point&	operator=(Point const &point);
 
-		Fixed	getX(void) const;
-		Fixed	getY(void) const;
+		const Fixed&	getX(void) const;
+		const Fixed&	getY(void) const;
 };
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point);

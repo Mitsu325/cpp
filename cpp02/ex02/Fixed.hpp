@@ -20,7 +20,7 @@ class Fixed
 {
 	private:
 		int					rawBits;
-		static const int	frac_bits = 8;
+		static const int	frac_bits;
 
 	public:
 		Fixed(void);
@@ -29,19 +29,19 @@ class Fixed
 		~Fixed(void);
 		Fixed(Fixed const &fixed);
 		Fixed&	operator=(Fixed const &fixed);
-		bool	operator>(Fixed const &fixed);
-		bool	operator>=(Fixed const &fixed);
-		bool	operator<(Fixed const &fixed);
-		bool	operator<=(Fixed const &fixed);
-		bool	operator==(Fixed const &fixed);
-		bool	operator!=(Fixed const &fixed);
-		Fixed	operator+(Fixed const &fixed);
-		Fixed	operator-(Fixed const &fixed);
-		Fixed	operator*(Fixed const &fixed);
-		Fixed	operator/(Fixed const &fixed);
-		Fixed	operator++();
+		bool	operator>(Fixed const &fixed) const;
+		bool	operator>=(Fixed const &fixed) const;
+		bool	operator<(Fixed const &fixed) const;
+		bool	operator<=(Fixed const &fixed) const;
+		bool	operator==(Fixed const &fixed) const;
+		bool	operator!=(Fixed const &fixed) const;
+		Fixed	operator+(Fixed const &fixed) const;
+		Fixed	operator-(Fixed const &fixed) const;
+		Fixed	operator*(Fixed const &fixed) const;
+		Fixed	operator/(Fixed const &fixed) const;
+		Fixed&	operator++(void);
 		Fixed	operator++(int);
-		Fixed	operator--();
+		Fixed&	operator--(void);
 		Fixed	operator--(int);
 
 		int		getRawBits(void) const;

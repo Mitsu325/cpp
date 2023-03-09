@@ -37,12 +37,12 @@ Point&	Point::operator=(Point const &point)
 	return (*this);
 }
 
-Fixed	Point::getX(void) const
+const Fixed&	Point::getX(void) const
 {
 	return (this->x);
 }
 
-Fixed	Point::getY(void) const
+const Fixed&	Point::getY(void) const
 {
 	return (this->y);
 }

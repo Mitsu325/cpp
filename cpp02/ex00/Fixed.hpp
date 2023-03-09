@@ -19,7 +19,7 @@ class Fixed
 {
 	private:
 		int					rawBits;
-		static const int	frac_bits = 8;
+		static const int	frac_bits;
 
 	public:
 		Fixed(void);
