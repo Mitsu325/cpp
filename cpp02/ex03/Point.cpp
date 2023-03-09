@@ -13,34 +13,27 @@
 #include "Point.hpp"
 
 Point::Point(void): x(0), y(0)
-{
-	// std::cout << "Default constructor called" << std::endl;
-	return ;
-}
+{}
 
 Point::Point(float const number1, float const number2): x(number1), y(number2)
-{
-	// std::cout << "Float constructor called" << std::endl;
-	return ;
-}
+{}
 
 Point::~Point(void)
-{
-	// std::cout << "Destructor called" << std::endl;
-	return ;
-}
+{}
 
 Point::Point(Point const &point)
 {
-	// std::cout << "Copy constructor called" << std::endl;
 	*this = point;
 	return ;
 }
 
 Point&	Point::operator=(Point const &point)
 {
-	(Fixed &) this->x = point.x;
-	(Fixed &) this->y = point.y;
+	if (this != &point)
+	{
+		(Fixed &) this->x = point.getX();
+		(Fixed &) this->y = point.getY();
+	}
 	return (*this);
 }
 

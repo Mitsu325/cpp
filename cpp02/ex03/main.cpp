@@ -12,11 +12,13 @@
 
 #include "Point.hpp"
 
-int main(void)
+int	main(void)
 {
 	bool	flag;
 
 	{
+		std::cout << "============ Inside ============" << std::endl;
+
 		Point const	p1(0, 0);
 		Point const	p2(10, 30);
 		Point const	p3(20, 0);
@@ -25,11 +27,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Vertex ============" << std::endl;
 		Point const	p1(0, 0);
 		Point const	p2(10, 30);
 		Point const	p3(20, 0);
@@ -38,11 +41,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Outside ===========" << std::endl;
 		Point const	p1(0, 0);
 		Point const	p2(10, 30);
 		Point const	p3(20, 0);
@@ -51,11 +55,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============= Edge =============" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -64,11 +69,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Inside ============" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -77,11 +83,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Outside ===========" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -90,11 +97,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Inside ============" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -103,11 +111,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============= Edge =============" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -116,11 +125,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Inside ============" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -129,11 +139,12 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	{
+		std::cout << "============ Inside ============" << std::endl;
 		Point const	p1(-4, 0);
 		Point const	p2(12, 8);
 		Point const	p3(12, 0);
@@ -142,9 +153,9 @@ int main(void)
 		flag = bsp(p1, p2, p3, P);
 
 		if (flag)
-			std::cout << "Yes it is." << std::endl;
+			std::cout << "Point is inside the triangle" << std::endl;
 		else
-			std::cout << "No it is not." << std::endl;
+			std::cout << "Point is outside the triangle" << std::endl;
 	}
 	return (0);
 }

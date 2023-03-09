@@ -19,7 +19,7 @@
 class Fixed
 {
 	private:
-		int	rawBits;
+		int					rawBits;
 		static const int	frac_bits = 8;
 
 	public:
@@ -48,9 +48,10 @@ class Fixed
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
-		static Fixed&	min(Fixed &num1, Fixed &num2);
+
+		static Fixed&			min(Fixed &num1, Fixed &num2);
 		static Fixed const &	min(Fixed const &num1, Fixed const &num2);
-		static Fixed&	max(Fixed &num1, Fixed &num2);
+		static Fixed&			max(Fixed &num1, Fixed &num2);
 		static Fixed const &	max(Fixed const &num1, Fixed const &num2);
 };
 

@@ -13,41 +13,31 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed(void): rawBits(0)
-{
-	// std::cout << "Default constructor called" << std::endl;
-	return ;
-}
+{}
 
 Fixed::Fixed(int const number)
 {
-	// std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(number << this->frac_bits);
+	this->rawBits = number << this->frac_bits;
 	return ;
 }
 
 Fixed::Fixed(float const number)
 {
-	// std::cout << "Float constructor called" << std::endl;
-	this->setRawBits(roundf(number * (1 << this->frac_bits)));
+	this->rawBits = roundf(number * (1 << this->frac_bits));
 	return ;
 }
 
 Fixed::~Fixed(void)
-{
-	// std::cout << "Destructor called" << std::endl;
-	return ;
-}
+{}
 
 Fixed::Fixed(Fixed const &fixed)
 {
-	// std::cout << "Copy constructor called" << std::endl;
 	*this = fixed;
 	return ;
 }
 
 Fixed&	Fixed::operator=(Fixed const &fixed)
 {
-	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &fixed)
 	{
 		this->rawBits = fixed.getRawBits();
