@@ -39,5 +39,15 @@ int	main(void)
 	std::cout << bill << std::endl;
 	std::cout << bee << std::endl;
 	std::cout << john << std::endl;
+	std::cout << "================================" << std::endl;
+
+	while (bill.getEnergyPoints() > 1)
+		bill.attack(john.getName());
+	std::cout << bill << std::endl;
+	bill.takeDamage(42);
+	bill.beRepaired(5);
+	bill.highFivesGuys();
+	bill.beRepaired(5);
+	std::cout << bill << std::endl;
 	return (0);
 }

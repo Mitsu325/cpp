@@ -47,11 +47,28 @@ FragTrap::~FragTrap(void)
 
 FragTrap&	FragTrap::operator=(FragTrap const &frag_trap)
 {
-	this->_name = frag_trap.getName();
-	this->_hit_points = frag_trap.getHitPoints();
-	this->_energy_points = frag_trap.getEnergyPoints();
-	this->_attack_damage = frag_trap.getAttackDamage();
+	std::cout << "FragTrap assigment operator called" << std::endl;
+	if (this != &frag_trap)
+	{
+		this->_name = frag_trap.getName();
+		this->_hit_points = frag_trap.getHitPoints();
+		this->_energy_points = frag_trap.getEnergyPoints();
+		this->_attack_damage = frag_trap.getAttackDamage();
+	}
 	return (*this);
+}
+
+void	FragTrap::attack(const std::string& target)
+{
+	if (this->_hit_points > 0 && this->_energy_points > 0)
+	{
+		this->_energy_points--;
+		std::cout << "FragTrap " << this->_name << " attacks ";
+		std::cout << target << ", causing " << this->_attack_damage;
+		std::cout << " points of damage!" << std::endl;
+		return ;
+	}
+	std::cout << "FragTrap " << this->_name << " is out of energy" << std::endl;
 }
 
 void	FragTrap::highFivesGuys(void)
@@ -59,7 +76,6 @@ void	FragTrap::highFivesGuys(void)
 	std::cout << "FragTrap " << this->_name << " request a positive high fives"
 		<< std::endl;
 }
-
 
 std::ostream&	operator<<(std::ostream &stream, FragTrap const &frag_trap)
 {

@@ -47,10 +47,14 @@ ScavTrap::~ScavTrap(void)
 
 ScavTrap&	ScavTrap::operator=(ScavTrap const &scav_trap)
 {
-	this->_name = scav_trap.getName();
-	this->_hit_points = scav_trap.getHitPoints();
-	this->_energy_points = scav_trap.getEnergyPoints();
-	this->_attack_damage = scav_trap.getAttackDamage();
+	std::cout << "ScavTrap assigment operator called" << std::endl;
+	if (this != &scav_trap)
+	{
+		this->_name = scav_trap.getName();
+		this->_hit_points = scav_trap.getHitPoints();
+		this->_energy_points = scav_trap.getEnergyPoints();
+		this->_attack_damage = scav_trap.getAttackDamage();
+	}
 	return (*this);
 }
 
@@ -77,8 +81,8 @@ void	ScavTrap::guardGate(void)
 std::ostream&	operator<<(std::ostream &stream, ScavTrap const &scav_trap)
 {
 	stream << "ScavTrap Name: " << scav_trap.getName() << std::endl;
-	stream << "HP: " << scav_trap.getHitPoints() << std::endl;
-	stream << "EP: " << scav_trap.getEnergyPoints() << std::endl;
+	stream << "HP: " << scav_trap.getHitPoints() << " | ";
+	stream << "EP: " << scav_trap.getEnergyPoints() << " | ";
 	stream << "AD: " << scav_trap.getAttackDamage() << std::endl;
 	return (stream);
 }

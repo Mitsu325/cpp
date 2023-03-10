@@ -12,8 +12,10 @@
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(void): ClapTrap("_clap_name"), ScavTrap("_clap_name"),
-	FragTrap("_clap_name")
+DiamondTrap::DiamondTrap(void):
+	ClapTrap("_clap_name"),
+	ScavTrap(""),
+	FragTrap("")
 {
 	std::cout << "DiamondTrap default constructor called" << std::endl;
 	ScavTrap::_energy_points = 50;
@@ -24,8 +26,10 @@ DiamondTrap::DiamondTrap(void): ClapTrap("_clap_name"), ScavTrap("_clap_name"),
 	return ;
 }
 
-DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"),
-	ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name")
+DiamondTrap::DiamondTrap(std::string name):
+	ClapTrap(name + "_clap_name"),
+	ScavTrap(name + "_clap_name"),
+	FragTrap(name + "_clap_name")
 {
 	std::cout << "DiamondTrap constructor called: " << std::endl;
 	ScavTrap::_energy_points = 50;
@@ -36,8 +40,10 @@ DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"),
 	return ;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const &copy): ClapTrap(copy),
-	ScavTrap(copy), FragTrap(copy)
+DiamondTrap::DiamondTrap(DiamondTrap const &copy):
+	ClapTrap(copy),
+	ScavTrap(copy),
+	FragTrap(copy)
 {
 	std::cout << "DiamondTrap copy constructor called" << std::endl;
 	*this = copy;
@@ -52,10 +58,14 @@ DiamondTrap::~DiamondTrap(void)
 
 DiamondTrap&	DiamondTrap::operator=(DiamondTrap const &obj)
 {
-	this->_name = obj.getName();
-	this->_hit_points = obj.getHitPoints();
-	this->_energy_points = obj.getEnergyPoints();
-	this->_attack_damage = obj.getAttackDamage();
+	std::cout << "DiamondTrap assigment operator called" << std::endl;
+	if (this != &obj)
+	{
+		this->_name = obj.getName();
+		this->_hit_points = obj.getHitPoints();
+		this->_energy_points = obj.getEnergyPoints();
+		this->_attack_damage = obj.getAttackDamage();
+	}
 	return (*this);
 }
 
@@ -81,8 +91,8 @@ std::string	DiamondTrap::getName(void) const
 std::ostream&	operator<<(std::ostream &stream, DiamondTrap const &diamond_trap)
 {
 	stream << "DiamondTrap Name: " << diamond_trap.getName() << std::endl;
-	stream << "HP: " << diamond_trap.getHitPoints() << std::endl;
-	stream << "EP: " << diamond_trap.getEnergyPoints() << std::endl;
+	stream << "HP: " << diamond_trap.getHitPoints() << " | ";
+	stream << "EP: " << diamond_trap.getEnergyPoints() << " | ";
 	stream << "AD: " << diamond_trap.getAttackDamage() << std::endl;
 	return (stream);
 }
