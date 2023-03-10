@@ -37,6 +37,14 @@ int main(void)
 		marvin.guardGate();
 		std::cout << marvin << std::endl;
 		std::cout << norm << std::endl;
+		while (marvin.getEnergyPoints() > 1)
+			marvin.attack(norm.getName());
+		std::cout << marvin << std::endl;
+		marvin.takeDamage(99);
+		marvin.beRepaired(5);
+		marvin.guardGate();
+		marvin.beRepaired(5);
+		std::cout << marvin << std::endl;
 	}
 	return (0);
 }

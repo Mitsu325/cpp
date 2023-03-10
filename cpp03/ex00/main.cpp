@@ -33,5 +33,13 @@ int main(void)
 	std::cout << marvin << std::endl;
 	std::cout << norm << std::endl;
 
+	while (marvin.getEnergyPoints() > 1)
+		marvin.attack(norm.getName());
+	std::cout << marvin << std::endl;
+	marvin.takeDamage(9);
+	marvin.beRepaired(5);
+	marvin.beRepaired(5);
+	std::cout << marvin << std::endl;
+
 	return (0);
 }
