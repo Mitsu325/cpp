@@ -33,5 +33,13 @@ int main(void)
 	std::cout << selene << std::endl;
 	std::cout << bill << std::endl;
 	std::cout << bee << std::endl;
+	while (bee.getEnergyPoints() > 1)
+		bee.attack(marvin.getName());
+	std::cout << bee << std::endl;
+	bee.takeDamage(99);
+	bee.beRepaired(5);
+	bee.highFivesGuys();
+	bee.beRepaired(5);
+	std::cout << bee << std::endl;
 	return (0);
 }

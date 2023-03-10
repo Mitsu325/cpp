@@ -12,7 +12,7 @@
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void)
+FragTrap::FragTrap(void): ClapTrap()
 {
 	std::cout << "FragTrap default constructor called" << std::endl;
 	_name = "";
@@ -22,7 +22,7 @@ FragTrap::FragTrap(void)
 	return ;
 }
 
-FragTrap::FragTrap(std::string name)
+FragTrap::FragTrap(std::string name): ClapTrap(name)
 {
 	std::cout << "FragTrap constructor called" << std::endl;
 	_name = name;
@@ -47,12 +47,30 @@ FragTrap::~FragTrap(void)
 
 FragTrap&	FragTrap::operator=(FragTrap const &frag_trap)
 {
-	this->_name = frag_trap.getName();
-	this->_hit_points = frag_trap.getHitPoints();
-	this->_energy_points = frag_trap.getEnergyPoints();
-	this->_attack_damage = frag_trap.getAttackDamage();
+	std::cout << "FragTrap assigment operator called" << std::endl;
+	if (this != &frag_trap)
+	{
+		this->_name = frag_trap.getName();
+		this->_hit_points = frag_trap.getHitPoints();
+		this->_energy_points = frag_trap.getEnergyPoints();
+		this->_attack_damage = frag_trap.getAttackDamage();
+	}
 	return (*this);
 }
+
+void	FragTrap::attack(const std::string& target)
+{
+	if (this->_hit_points > 0 && this->_energy_points > 0)
+	{
+		this->_energy_points--;
+		std::cout << "FragTrap " << this->_name << " attacks ";
+		std::cout << target << ", causing " << this->_attack_damage;
+		std::cout << " points of damage!" << std::endl;
+		return ;
+	}
+	std::cout << "FragTrap " << this->_name << " is out of energy" << std::endl;
+}
+
 
 void	FragTrap::highFivesGuys(void)
 {
@@ -64,8 +82,8 @@ void	FragTrap::highFivesGuys(void)
 std::ostream&	operator<<(std::ostream &stream, FragTrap const &frag_trap)
 {
 	stream << "FragTrap Name: " << frag_trap.getName() << std::endl;
-	stream << "HP: " << frag_trap.getHitPoints() << std::endl;
-	stream << "EP: " << frag_trap.getEnergyPoints() << std::endl;
+	stream << "HP: " << frag_trap.getHitPoints() << " | ";
+	stream << "EP: " << frag_trap.getEnergyPoints() << " | ";
 	stream << "AD: " << frag_trap.getAttackDamage() << std::endl;
 	return (stream);
 }

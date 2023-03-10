@@ -12,15 +12,21 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void): _name(""), _hit_points(10), _energy_points(10),
+ClapTrap::ClapTrap(void):
+	_name(""),
+	_hit_points(10),
+	_energy_points(10),
 	_attack_damage(0)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 	return ;
 }
 
-ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(10),
-	_energy_points(10), _attack_damage(0)
+ClapTrap::ClapTrap(std::string name):
+	_name(name),
+	_hit_points(10),
+	_energy_points(10),
+	_attack_damage(0)
 {
 	std::cout << "ClapTrap constructor called" << std::endl;
 	return ;
@@ -41,10 +47,14 @@ ClapTrap::~ClapTrap(void)
 
 ClapTrap&	ClapTrap::operator=(ClapTrap const &clap_trap)
 {
-	this->_name = clap_trap.getName();
-	this->_hit_points = clap_trap.getHitPoints();
-	this->_energy_points = clap_trap.getEnergyPoints();
-	this->_attack_damage = clap_trap.getAttackDamage();
+	std::cout << "ClapTrap assigment operator called" << std::endl;
+	if (this != &clap_trap)
+	{
+		this->_name = clap_trap.getName();
+		this->_hit_points = clap_trap.getHitPoints();
+		this->_energy_points = clap_trap.getEnergyPoints();
+		this->_attack_damage = clap_trap.getAttackDamage();
+	}
 	return (*this);
 }
 
@@ -63,17 +73,22 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "ClapTrap " << this->_name << " takes " << amount;
-	std::cout << " points of damage!" << std::endl;
-	if (amount > this->_hit_points)
-		this->_hit_points = 0;
-	else
-		this->_hit_points -= amount;
+	if (this->_hit_points > 0 && this->_energy_points > 0)
+	{
+		std::cout << "ClapTrap " << this->_name << " takes " << amount;
+		std::cout << " points of damage!" << std::endl;
+		if (amount > this->_hit_points)
+			this->_hit_points = 0;
+		else
+			this->_hit_points -= amount;
+		return ;
+	}
+	std::cout << "ClapTrap " << this->_name << " is out of energy" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->_energy_points > 0)
+	if (this->_hit_points > 0 && this->_energy_points > 0)
 	{
 		this->_hit_points += amount;
 		this->_energy_points--;
@@ -127,8 +142,8 @@ void	ClapTrap::setAttackDamage(unsigned int attack_damage)
 std::ostream&	operator<<(std::ostream &stream, ClapTrap const &clap_trap)
 {
 	stream << "ClapTrap Name: " << clap_trap.getName() << std::endl;
-	stream << "HP: " << clap_trap.getHitPoints() << std::endl;
-	stream << "EP: " << clap_trap.getEnergyPoints() << std::endl;
+	stream << "HP: " << clap_trap.getHitPoints() << " | ";
+	stream << "EP: " << clap_trap.getEnergyPoints() << " | ";
 	stream << "AD: " << clap_trap.getAttackDamage() << std::endl;
 	return (stream);
 }
