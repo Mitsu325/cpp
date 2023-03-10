@@ -12,7 +12,7 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+ScavTrap::ScavTrap(void): ClapTrap()
 {
 	std::cout << "ScavTrap default constructor called" << std::endl;
 	_name = "";
