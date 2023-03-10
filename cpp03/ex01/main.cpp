@@ -25,6 +25,7 @@ int main(void)
 		std::cout << marvin << std::endl;
 	}
 	{
+		std::cout << "==========================" << std::endl;
 		ScavTrap marvin("Marvin");
 		ClapTrap norm("Norm");
 
