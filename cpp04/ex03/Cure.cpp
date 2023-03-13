@@ -40,7 +40,10 @@ Cure::~Cure(void)
 Cure&	Cure::operator=(Cure const &obj)
 {
 	std::cout << "Cure assignment operator called" << std::endl;
-	this->type = obj.type;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 

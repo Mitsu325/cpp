@@ -40,7 +40,10 @@ Ice::~Ice(void)
 Ice&	Ice::operator=(Ice const &obj)
 {
 	std::cout << "Ice assignment operator called" << std::endl;
-	this->type = obj.type;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 

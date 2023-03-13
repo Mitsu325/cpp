@@ -51,16 +51,19 @@ MateriaSource::~MateriaSource(void)
 
 MateriaSource&	MateriaSource::operator=(MateriaSource const &obj)
 {
-	for (size_t i = 0; i < TEMPLATE_SIZE; i++)
+	if (this != &obj)
 	{
-		if (this->_materia_template[i])
+		for (size_t i = 0; i < TEMPLATE_SIZE; i++)
 		{
-			delete this->_materia_template[i];
-			this->_materia_template[i] = NULL;
-		}
-		if (obj._materia_template[i])
-		{
-			this->_materia_template[i] = obj._materia_template[i]->clone();
+			if (this->_materia_template[i])
+			{
+				delete this->_materia_template[i];
+				this->_materia_template[i] = NULL;
+			}
+			if (obj._materia_template[i])
+			{
+				this->_materia_template[i] = obj._materia_template[i]->clone();
+			}
 		}
 	}
 	std::cout << "MateriaSource assignment operator called" << std::endl;
@@ -76,7 +79,7 @@ void	MateriaSource::learnMateria(AMateria* materia)
 			this->_materia_template[i] = materia;
 			std::cout << "Materia learned: "
 				<< this->_materia_template[i]->getType() << std::endl;
-			break;
+			return ;
 		}
 	}
 	std::cout << "Can't learn more than 4 Materia" << std::endl;
@@ -94,7 +97,7 @@ AMateria*	MateriaSource::createMateria(std::string const & type)
 	if (i >= 4 || !this->_materia_template[i])
 	{
 		std::cout << type << " materia does not exit" << std::endl;
-		return (NULL);
+		return (0);
 	}
 	std::cout << "Create Materia: " << this->_materia_template[i]->getType()
 		<< std::endl;

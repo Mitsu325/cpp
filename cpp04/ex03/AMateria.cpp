@@ -40,11 +40,19 @@ AMateria::~AMateria(void)
 AMateria&	AMateria::operator=(AMateria const &obj)
 {
 	std::cout << "Abstract Materia assignment operator called" << std::endl;
-	this->type = obj.type;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 
 std::string const &	AMateria::getType(void) const
 {
 	return (this->type);
+}
+
+void	AMateria::use(ICharacter& target)
+{
+	(void)target;
 }

@@ -67,17 +67,20 @@ Character::~Character(void)
 
 Character&	Character::operator=(Character const &obj)
 {
-	this->_name = obj._name;
-	for (size_t i = 0; i < INVENTORY_SIZE; i++)
+	if (this != &obj)
 	{
-		if (this->_inventory[i])
+		this->_name = obj._name;
+		for (size_t i = 0; i < INVENTORY_SIZE; i++)
 		{
-			delete this->_inventory[i];
-			this->_inventory[i] = NULL;
-		}
-		if (obj._inventory[i])
-		{
-			this->_inventory[i] = obj._inventory[i]->clone();
+			if (this->_inventory[i])
+			{
+				delete this->_inventory[i];
+				this->_inventory[i] = NULL;
+			}
+			if (obj._inventory[i])
+			{
+				this->_inventory[i] = obj._inventory[i]->clone();
+			}
 		}
 	}
 	std::cout << "Character assignment operator called" << std::endl;
