@@ -26,7 +26,7 @@ class Array
 		unsigned int	_size;
 
 	public:
-		Array(): _array(new T()), _size(0) {}
+		Array(): _array(NULL), _size(0) {}
 
 		Array(unsigned int n): _array(new T[n]), _size(n) {}
 

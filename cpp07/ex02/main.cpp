@@ -14,8 +14,11 @@
 
 int main(void)
 {
+	Array<int> arr0;
 	Array<int> arr1(8);
 	Array<int> arr2(4);
+
+	std::cout << "arr0: " << arr0 << std::endl;
 
 	for (unsigned int i = 0; i < arr1.size(); i++) {
 		arr1[i] = i + 2;
