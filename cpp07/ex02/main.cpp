@@ -55,6 +55,14 @@ int main(void)
 	try
 	{
 		std::cout << "arr1[5]: " << arr1[5] << std::endl;
+		std::cout << "arr1[-2]: " << arr1[-2] << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
 		std::cout << "arr1[10]: " << arr1[10] << std::endl;
 	}
 	catch(const std::exception& e)
