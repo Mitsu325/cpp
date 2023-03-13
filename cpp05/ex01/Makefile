@@ -26,6 +26,7 @@ NAME = bureaucrat
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+VAL = valgrind --leak-check=full --show-leak-kinds=all
 
 # DELETE #
 
@@ -55,10 +56,10 @@ $(NAME): $(OBJ_DIR) $(OBJS)
 		@echo "\n$(CYAN)----------------------------------------"
 		@echo "--------------- MAKE EX01 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
-		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp $(HEADER)
-		@$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir $(OBJ_DIR)
@@ -73,5 +74,8 @@ fclean: clean
 		@echo "----------------------------------------\n$(DEFAULT)"
 
 re: fclean all
+
+run: re
+		$(VAL) ./$(NAME)
 
 .PHONY: all clean fclean re
