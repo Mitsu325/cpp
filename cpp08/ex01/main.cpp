@@ -81,18 +81,21 @@ void	test_big(void)
 
 	sp1.randFill();
 	std::cout << "&sp1: " << &sp1 << std::endl;
-	std::cout << sp1.shortestSpan() << std::endl;
-	std::cout << sp1.longestSpan() << std::endl;
+	std::cout << "Shortest span: " << sp1.shortestSpan() << std::endl;
+	std::cout << "Longest span: " << sp1.longestSpan() << std::endl;
+	std::cout << std::endl;
 
 	Span sp2(sp1);
 	std::cout << "&sp2: " << &sp2 << std::endl;
-	std::cout << sp2.shortestSpan() << std::endl;
-	std::cout << sp2.longestSpan() << std::endl;
+	std::cout << "Shortest span: " << sp2.shortestSpan() << std::endl;
+	std::cout << "Longest span: " << sp2.longestSpan() << std::endl;
+	std::cout << std::endl;
 
 	Span sp3 = sp1;
 	std::cout << "&sp3: " << &sp3 << std::endl;
-	std::cout << sp3.shortestSpan() << std::endl;
-	std::cout << sp3.longestSpan() << std::endl;
+	std::cout << "Shortest span: " << sp3.shortestSpan() << std::endl;
+	std::cout << "Longest span: " << sp3.longestSpan() << std::endl;
+	std::cout << std::endl;
 	return ;
 }
 
