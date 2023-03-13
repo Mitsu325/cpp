@@ -37,17 +37,23 @@ Dog::~Dog(void)
 Dog&	Dog::operator=(Dog const &obj)
 {
 	std::cout << "Dog assignment operator called" << std::endl;
-	this->type = obj.getType();
-	this->brain = new Brain();
-	*this->brain = *(obj.getBrain());
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+		this->brain = new Brain();
+		*this->brain = *(obj.getBrain());
+	}
 	return (*this);
 }
 
 Animal&	Dog::operator=(Animal const &obj)
 {
 	std::cout << "Animal Dog assignment operator called" << std::endl;
-	this->type = obj.getType();
-	*this->brain = *(obj.getBrain());
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+		*this->brain = *(obj.getBrain());
+	}
 	return (*this);
 }
 

@@ -40,7 +40,10 @@ Animal::~Animal(void)
 Animal&	Animal::operator=(Animal const &obj)
 {
 	std::cout << "Animal assignment operator called" << std::endl;
-	this->type = obj.type;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 
@@ -49,7 +52,7 @@ void	Animal::makeSound(void) const
 	std::cout << "........." << std::endl;
 }
 
-std::string	Animal::getType(void) const
+const std::string&	Animal::getType(void) const
 {
 	return (this->type);
 }

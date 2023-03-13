@@ -66,6 +66,8 @@ int main(void)
 		cat->addIdea("Run");
 		std::cout << "Cat ideas: " << std::endl;
 		cat->printIdeas();
+		delete cat;
+		cat = NULL;
 		std::cout << "Cat copy ideas: " << std::endl;
 		cat_copy->printIdeas();
 		std::cout << "---------" << std::endl;
@@ -79,8 +81,6 @@ int main(void)
 		std::cout << "Dog copy ideas: " << dog_copy.getBrain() << std::endl;
 		dog_copy.printIdeas();
 		std::cout << "=========================================" << std::endl;
-		delete cat;
-		cat = NULL;
 		delete cat_copy;
 		cat_copy = NULL;
 	}

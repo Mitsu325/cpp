@@ -28,8 +28,8 @@ class WrongAnimal
 		~WrongAnimal(void);
 		WrongAnimal&	operator=(WrongAnimal const &obj);
 
-		void			makeSound(void) const;
-		std::string		getType(void) const;
+		void				makeSound(void) const;
+		const std::string&	getType(void) const;
 };
 
 std::ostream&	operator<<(std::ostream &stream, WrongAnimal const &obj);
