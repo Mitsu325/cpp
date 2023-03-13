@@ -27,7 +27,7 @@ void	iter(T *arr, size_t size, void (*f)(T &))
 }
 
 template<typename T>
-void	put(T &x)
+void	print(T &x)
 {
 	std::cout << x << std::endl;
 }

@@ -49,13 +49,13 @@ OBJS = $(addprefix $(OBJ_DIR), $(notdir $(FILES:.cpp=.o)))
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 		@echo "\n$(CYAN)----------------------------------------"
 		@echo "--------------- MAKE EX01 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
-		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp $(HEADER)
-		@$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir $(OBJ_DIR)
