@@ -12,7 +12,22 @@
 
 #include "Convert.hpp"
 
-int main(int argc, char**argv)
+void	convertTest(char* input)
+{
+	try
+	{
+		Convert	param(input);
+		param.convert();
+		std::cout << param << std::endl;
+		return ;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+}
+
+int main(int argc, char** argv)
 {
 	if (argc != 2)
 	{
@@ -20,17 +35,27 @@ int main(int argc, char**argv)
 		std::cout << "usage: ./convert arg" << std::endl;
 		return (1);
 	}
-
-	try
+	if (std::string(argv[1]) == "-t")
 	{
-		Convert	param(argv[1]);
-		param.convert();
-		std::cout << param << std::endl;
+		convertTest((char*)"m");
+		convertTest((char*)"0");
+		convertTest((char*)"-12");
+		convertTest((char*)"+12");
+		convertTest((char*)"42.0f");
+		convertTest((char*)"+42.0f");
+		convertTest((char*)"-42.0f");
+		convertTest((char*)"42.0");
+		convertTest((char*)"+42.0");
+		convertTest((char*)"-42.0");
+		convertTest((char*)"nan");
+		convertTest((char*)"nanf");
+		convertTest((char*)"+inf");
+		convertTest((char*)"+inff");
+		convertTest((char*)"-inf");
+		convertTest((char*)"-inff");
 		return (0);
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+
+	convertTest(argv[1]);
 	return (0);
 }

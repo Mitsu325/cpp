@@ -26,6 +26,7 @@ NAME = convert
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+VAL = valgrind --leak-check=full --show-leak-kinds=all
 
 # DELETE #
 
@@ -50,13 +51,13 @@ OBJS = $(addprefix $(OBJ_DIR), $(notdir $(FILES:.cpp=.o)))
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 		@echo "\n$(CYAN)----------------------------------------"
 		@echo "--------------- MAKE EX00 --------------"
 		@echo "----------------------------------------\n$(DEFAULT)"
-		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp $(HEADER)
-		@$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir $(OBJ_DIR)
@@ -71,5 +72,8 @@ fclean: clean
 		@echo "----------------------------------------\n$(DEFAULT)"
 
 re: fclean all
+
+run: re
+		$(VAL) ./$(NAME)
 
 .PHONY: all clean fclean re
