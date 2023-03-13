@@ -18,6 +18,7 @@
 
 Base	*generate(void)
 {
+	srand(time(0));
 	if ((rand() % 3) == 0)
 	{
 		return (new A);
@@ -76,9 +77,6 @@ void	identify(Base& p)
 int	main(void)
 {
 	Base	*ptr1 = generate();
-	Base	*ptr2 = generate();
-	Base	*ptr3 = generate();
-	Base	*ptr4 = generate();
 
 	std::cout << "==================================" << std::endl;
 
@@ -88,29 +86,8 @@ int	main(void)
 	identify(*ptr1);
 	std::cout << std::endl;
 
-	std::cout << "*ptr2 = ";
-	identify(ptr2);
-	std::cout << "&ptr2 = ";
-	identify(*ptr2);
-	std::cout << std::endl;
-
-	std::cout << "*ptr3 = ";
-	identify(ptr3);
-	std::cout << "&ptr3 = ";
-	identify(*ptr3);
-	std::cout << std::endl;
-
-	std::cout << "*ptr4 = ";
-	identify(ptr4);
-	std::cout << "&ptr4 = ";
-	identify(*ptr4);
-	std::cout << std::endl;
-
 	std::cout << "==================================" << std::endl;
 
 	delete ptr1;
-	delete ptr2;
-	delete ptr3;
-	delete ptr4;
 	return (0);
 }
