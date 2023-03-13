@@ -25,7 +25,7 @@ class Cat: public AAnimal
 		Cat(void);
 		Cat(Cat const &obj);
 		~Cat(void);
-		Cat&	operator=(Cat const &obj);
+		Cat&		operator=(Cat const &obj);
 		AAnimal&	operator=(AAnimal const &obj);
 
 		void	makeSound(void) const;

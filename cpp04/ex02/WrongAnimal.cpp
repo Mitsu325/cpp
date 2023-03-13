@@ -39,7 +39,11 @@ WrongAnimal::~WrongAnimal(void)
 
 WrongAnimal&	WrongAnimal::operator=(WrongAnimal const &obj)
 {
-	this->type = obj.type;
+	std::cout << "WrongAnimal assigment operator called" << std::endl;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 

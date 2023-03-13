@@ -34,9 +34,12 @@ Brain::~Brain(void)
 Brain&	Brain::operator=(Brain const &obj)
 {
 	std::cout << "Brain assignment operator called" << std::endl;
-	for (size_t i = 0; i < IDEA_SIZE; i++)
+	if (this != &obj)
 	{
-		this->ideas[i] = obj.getIdea(i);
+		for (size_t i = 0; i < IDEA_SIZE; i++)
+		{
+			this->ideas[i] = obj.getIdea(i);
+		}
 	}
 	return (*this);
 }

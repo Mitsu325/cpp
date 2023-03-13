@@ -25,7 +25,7 @@ class Dog: public AAnimal
 		Dog(void);
 		Dog(Dog const &obj);
 		~Dog(void);
-		Dog&	operator=(Dog const &obj);
+		Dog&		operator=(Dog const &obj);
 		AAnimal&	operator=(AAnimal const &obj);
 
 		void	makeSound(void) const;

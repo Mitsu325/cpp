@@ -31,7 +31,7 @@ class AAnimal
 		virtual AAnimal&	operator=(AAnimal const &obj);
 
 		std::string		getType(void) const;
-		virtual void	makeSound(void) const;
+		virtual void	makeSound(void) const = 0;
 		virtual void	printIdeas(void) const = 0;
 		virtual void	addIdea(std::string idea) = 0;
 		virtual Brain*	getBrain(void) const = 0;

@@ -40,13 +40,11 @@ AAnimal::~AAnimal(void)
 AAnimal&	AAnimal::operator=(AAnimal const &obj)
 {
 	std::cout << "Animal assignment operator called" << std::endl;
-	this->type = obj.type;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
-}
-
-void	AAnimal::makeSound(void) const
-{
-	std::cout << "........." << std::endl;
 }
 
 std::string	AAnimal::getType(void) const
