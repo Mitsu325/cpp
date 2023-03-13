@@ -39,7 +39,11 @@ Animal::~Animal(void)
 
 Animal&	Animal::operator=(Animal const &obj)
 {
-	this->type = obj.type;
+	std::cout << "Animal assigment operator called" << std::endl;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 
@@ -48,7 +52,7 @@ void	Animal::makeSound(void) const
 	std::cout << "........." << std::endl;
 }
 
-std::string	Animal::getType(void) const
+const std::string&	Animal::getType(void) const
 {
 	return (this->type);
 }

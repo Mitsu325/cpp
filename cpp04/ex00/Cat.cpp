@@ -33,7 +33,11 @@ Cat::~Cat(void)
 
 Cat&	Cat::operator=(Cat const &obj)
 {
-	this->type = obj.type;
+	std::cout << obj.getType() << " assigment operator called" << std::endl;
+	if (this != &obj)
+	{
+		this->type = obj.getType();
+	}
 	return (*this);
 }
 
