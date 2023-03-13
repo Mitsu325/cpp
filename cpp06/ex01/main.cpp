@@ -14,7 +14,8 @@
 
 int main(void)
 {
-	Data	*data = new Data("test serialize");
+	std::string name = "test serialize";
+	Data	*data = new Data(name);
 	uintptr_t	serialized_data;
 	Data	*deserialized_data;
 
@@ -22,13 +23,9 @@ int main(void)
 	std::cout << "data: " << data << std::endl;
 	std::cout << *data << std::endl;
 
-	std::cout << "===== Compare data and deserialized_data =====" << std::endl;
-	std::cout << (data == deserialized_data) << std::endl;
-	std::cout << std::endl;
-
 	std::cout << "================= Serialized =================" << std::endl;
 	serialized_data = serialize(data);
-	std::cout << "serialized_data" << serialized_data << std::endl;
+	std::cout << "serialized_data: " << &serialized_data << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "================ Deserialized ================" << std::endl;
