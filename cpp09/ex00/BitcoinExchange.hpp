@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:51:04 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:06:43 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:38:55 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <map>
 # include <stdlib.h>
 
-# define DATABASE_FILE "data.cs"
+# define DATABASE_FILE "data.csv"
 
 class BitcoinExchange
 {
@@ -41,19 +41,19 @@ class BitcoinExchange
 		~BitcoinExchange(void);
 		BitcoinExchange&	operator=(BitcoinExchange const &obj);
 
-		// std::string	getName(void) const;
+		std::string						getFile(void) const;
+		std::map<std::string, float>	getDatabase(void) const;
+		void							displayExchange(void);
 
-		// class GradeTooHighException: public std::exception
-		// {
-		// 	public:
-		// 		virtual const char* what() const throw();
-		// };
+		class BitcoinExchangeException: public std::exception
+		{
+			private:
+				const char* _msg;
 
-		// class GradeTooLowException: public std::exception
-		// {
-		// 	public:
-		// 		virtual const char* what() const throw();
-		// };
+			public:
+				BitcoinExchangeException(const char* msg);
+				virtual const char* what() const throw();
+		};
 };
 
 #endif

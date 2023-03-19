@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:38:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:00:50 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:27:16 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 
 void	btc(char *file)
 {
-	BitcoinExchange bitcoinExchange(file);
+	try
+	{
+		BitcoinExchange bitcoinExchange(file);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Error: " << e.what() << "." << std::endl;
+	}
 }
 
 int	main(int argc, char** argv)

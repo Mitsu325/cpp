@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:53:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:03:55 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:36:40 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 BitcoinExchange::BitcoinExchange(void)
 {
-	this->loadDatabase();
 	std::cout << "BitcoinExchange default constructor called" << std::endl;
+	this->loadDatabase();
 	return ;
 }
 
 BitcoinExchange::BitcoinExchange(char* file): _file(file)
 {
-	this->loadDatabase();
 	std::cout << "BitcoinExchange default constructor called" << std::endl;
+	this->loadDatabase();
 	return ;
 }
-
-// BitcoinExchange::BitcoinExchange(std::string name): _name(name), _grade(150)
-// {
-// 	std::cout << "BitcoinExchange constructor called" << std::endl;
-// 	return ;
-// }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &obj)
 {
@@ -49,7 +43,8 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const &obj)
 {
 	if (this != &obj)
 	{
-		// this->_grade = obj.getGrade();
+		this->_file = obj.getFile();
+		this->_database = obj.getDatabase();
 	}
 	return (*this);
 }
@@ -79,8 +74,7 @@ int	BitcoinExchange::loadDatabase(void)
 	fs_in.open(DATABASE_FILE, std::fstream::in);
 	if (!fs_in.is_open())
 	{
-		std::cerr << "Error: " << std::strerror(errno) << std::endl;
-		return (1);
+		throw BitcoinExchange::BitcoinExchangeException("could not open file");
 	}
 	while (std::getline(fs_in, line))
 	{
@@ -102,17 +96,20 @@ int	BitcoinExchange::loadDatabase(void)
 	return (0);
 }
 
-// std::string	BitcoinExchange::getName(void) const
-// {
-// 	return (this->_name);
-// }
+std::string	BitcoinExchange::getFile(void) const
+{
+	return (this->_file);
+}
 
-// const char* BitcoinExchange::GradeTooHighException::what() const throw()
-// {
-// 	return ("* Grade too high *");
-// }
+std::map<std::string, float> BitcoinExchange::getDatabase(void) const
+{
+	return (this->_database);
+}
 
-// const char* BitcoinExchange::GradeTooLowException::what() const throw()
-// {
-// 	return ("* Grade too low *");
-// }
+BitcoinExchange::BitcoinExchangeException::BitcoinExchangeException(const char* msg):
+	_msg(msg) {}
+
+const char* BitcoinExchange::BitcoinExchangeException::what() const throw()
+{
+	return (this->_msg);
+}
