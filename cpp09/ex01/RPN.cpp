@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 17:32:01 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 18:16:42 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:46:01 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ RPN::RPN(void)
 
 RPN::RPN(char* notation): _notation(notation)
 {
-	std::cout << "RPN default constructor called" << std::endl;
+	std::cout << "RPN constructor called" << std::endl;
 	return ;
 }
 
@@ -69,28 +69,58 @@ bool	RPN::validateNumber(std::string token)
 	return (false);
 }
 
-void	RPN::calculate(void)
+void	RPN::calculate(const char* arithmetic_operator)
+{
+	int	a, b;
+
+	if (this->_stack.size() < 2)
+	{
+		throw RPN::RPNException("Error: no result");
+	}
+	b = this->_stack.top();
+	this->_stack.pop();
+	a = this->_stack.top();
+	this->_stack.pop();
+	switch (*arithmetic_operator)
+	{
+		case '+':
+			this->_stack.push(a + b);
+			break;
+		case '-':
+			this->_stack.push(a - b);
+			break;
+		case '*':
+			this->_stack.push(a * b);
+			break;
+		case '/':
+			this->_stack.push(a / b);
+			break;
+		default:
+			break;
+	}
+}
+
+void	RPN::compute(void)
 {
 	std::stringstream	buffer(this->_notation);
 	std::string			token;
-	int					num;
 
 	while (buffer >> token)
 	{
 		if (this->validateOperator(token))
 		{
-			std::cout << token << std::endl;
+			this->calculate(token.c_str());
 		}
 		else if (this->validateNumber(token))
 		{
-			num = atoi(token.c_str());
-			std::cout << num << std::endl;
+			this->_stack.push(atoi(token.c_str()));
 		}
 		else
 		{
-			throw RPN::RPNException("Error");
+			throw RPN::RPNException("Error: invalid expression");
 		}
 	}
+	std::cout << this->_stack.top() << std::endl;
 	return ;
 }
 

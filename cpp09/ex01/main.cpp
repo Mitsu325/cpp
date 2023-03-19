@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 17:18:12 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 18:12:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:26:42 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	reversePolishNotation(char *arg)
 	{
 		RPN rpn(arg);
 
-		rpn.calculate();
+		rpn.compute();
 	}
 	catch(const std::exception& e)
 	{
