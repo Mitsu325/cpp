@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:53:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 12:18:45 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:56:53 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,33 @@ bool	BitcoinExchange::checkFormat(std::string line, std::string delimiter, int n
 	return (count == num);
 }
 
+bool BitcoinExchange::checkDate(std::string date)
+{
+	int					year, month, day;
+	time_t				raw_time;
+	struct tm			*time_info, *time_norm;
+
+	time(&raw_time);
+	time_info = localtime(&raw_time);
+	if (strptime(date.c_str(), "%Y-%m-%d", time_info))
+	{
+		year = time_info->tm_year;
+		month = time_info->tm_mon;
+		day = time_info->tm_mday;
+		raw_time = mktime(time_info);
+		time_norm = localtime(&raw_time);
+		return (time_norm->tm_mday == day &&
+				time_norm->tm_mon == month &&
+				time_norm->tm_year == year);
+	}
+	return (false);
+}
+
 void	BitcoinExchange::loadDatabase(void)
 {
 	std::string		line, date, delimiter = ",";
 	std::fstream	fs_in;
 	size_t			pos = 0;
-	tm				time_info;
 
 	fs_in.open(DATABASE_FILE, std::fstream::in);
 	if (!fs_in.is_open())
@@ -83,7 +104,7 @@ void	BitcoinExchange::loadDatabase(void)
 			pos = line.find(delimiter);
 			date = line.substr(0, pos);
 			line.erase(0, pos + delimiter.length());
-			if (!strptime(date.c_str(), "%Y-%m-%d", &time_info))
+			if (!checkDate(date))
 				continue;
 			_database[date] = strtof(line.c_str(), NULL);
 		}
@@ -97,7 +118,6 @@ void	BitcoinExchange::displayExchange(void)
 	std::fstream	fs_in;
 	float			bitcoin;
 	size_t			pos = 0;
-	tm				time_info;
 
 	fs_in.open(this->_file.c_str(), std::fstream::in);
 	if (!fs_in.is_open())
@@ -112,7 +132,7 @@ void	BitcoinExchange::displayExchange(void)
 			date = line.substr(0, pos);
 			pos = pos + delimiter.length();
 			bitcoin = strtof(line.c_str() + pos, NULL);
-			if (!strptime(date.c_str(), "%Y-%m-%d", &time_info))
+			if (!checkDate(date))
 			{
 				std::cout << "Error: invalid date => " << date << std::endl;
 				continue;

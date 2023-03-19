@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:51:04 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:54:36 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:55:26 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class BitcoinExchange
 
 		void	loadDatabase(void);
 		bool	checkFormat(std::string line, std::string delimiter, int num);
+		bool	checkDate(std::string line);
 
 	public:
 		BitcoinExchange(void);
