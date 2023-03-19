@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:53:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 15:12:34 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 16:23:53 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const &obj)
 	return (*this);
 }
 
-bool	BitcoinExchange::checkFormat(std::string line, std::string delimiter, int num)
+bool	BitcoinExchange::checkFormat(std::string line, std::string delimiter,
+	int num)
 {
 	size_t	found = 0;
 	int		count = 0;
@@ -104,20 +105,61 @@ void	BitcoinExchange::loadDatabase(void)
 			pos = line.find(delimiter);
 			date = line.substr(0, pos);
 			line.erase(0, pos + delimiter.length());
-			if (!checkDate(date))
+			if (!this->checkDate(date))
 				continue;
-			_database[date] = strtof(line.c_str(), NULL);
+			this->_database[date] = strtof(line.c_str(), NULL);
 		}
 	}
 	return ;
 }
 
+void	BitcoinExchange::getFileData(std::string line, std::string delimiter,
+	std::string &date, float &bitcoin)
+{
+	size_t	pos = 0;
+
+	pos = line.find(delimiter);
+	date = line.substr(0, pos);
+	pos = pos + delimiter.length();
+	bitcoin = strtof(line.c_str() + pos, NULL);
+}
+
+bool	BitcoinExchange::validateFileData(std::string date, float bitcoin)
+{
+	if (!this->checkDate(date))
+	{
+		std::cout << "Error: invalid date => " << date << std::endl;
+		return (false);
+	}
+	if (bitcoin < 0)
+	{
+		std::cout << "Error: not a positive number." << std::endl;
+		return (false);
+	}
+	if (bitcoin > 1000)
+	{
+		std::cout << "Error: too large a number." << std::endl;
+		return (false);
+	}
+	return (true);
+}
+
+void	BitcoinExchange::displayFileData(std::string date, float bitcoin)
+{
+	std::map<std::string, float>::iterator	it;
+
+	it = this->_database.upper_bound(date);
+	if (it != this->_database.begin())
+		it--;
+	std::cout << date << " => " << bitcoin << " = " << (*it).second * bitcoin;
+	std::cout << std::endl;
+}
+
 void	BitcoinExchange::displayExchange(void)
 {
-	std::string		line, date, value, delimiter = " | ";
+	std::string		line, date, delimiter = " | ";
 	std::fstream	fs_in;
 	float			bitcoin;
-	size_t			pos = 0;
 
 	fs_in.open(this->_file.c_str(), std::fstream::in);
 	if (!fs_in.is_open())
@@ -128,29 +170,9 @@ void	BitcoinExchange::displayExchange(void)
 	{
 		if (this->checkFormat(line, delimiter, 1))
 		{
-			pos = line.find(delimiter);
-			date = line.substr(0, pos);
-			pos = pos + delimiter.length();
-			bitcoin = strtof(line.c_str() + pos, NULL);
-			if (!checkDate(date))
-			{
-				std::cout << "Error: invalid date => " << date << std::endl;
-				continue;
-			}
-			if (bitcoin < 0)
-			{
-				std::cout << "Error: not a positive number." << std::endl;
-				continue;
-			}
-			if (bitcoin > 1000)
-			{
-				std::cout << "Error: too large a number." << std::endl;
-				continue;
-			}
-			std::map<std::string, float>::iterator it = this->_database.upper_bound(date);
-			if (it != this->_database.begin())
-				it--;
-			std::cout << date << " => " << bitcoin << " = " << (*it).second * bitcoin << std::endl;
+			this->getFileData(line, delimiter, date, bitcoin);
+			if (!this->validateFileData(date, bitcoin)) continue;
+			this->displayFileData(date, bitcoin);
 		}
 		else
 		{

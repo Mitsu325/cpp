@@ -6,14 +6,14 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:38:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 12:05:13 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:58:33 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <iostream>
 
-void	btc(char *file)
+static void	btc(char *file)
 {
 	try
 	{
