@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 21:50:49 by pmitsuko          #+#    #+#              #
-#    Updated: 2023/03/18 13:38:29 by pmitsuko         ###   ########.fr        #
+#    Updated: 2023/03/19 16:31:11 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME = btc
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+VAL = valgrind --leak-check=full --show-leak-kinds=all
 
 # DELETE #
 
@@ -71,5 +72,8 @@ fclean: clean
 		@echo "----------------------------------------\n$(DEFAULT)"
 
 re: fclean all
+
+run: re
+		$(VAL) ./$(NAME) input.txt
 
 .PHONY: all clean fclean re
