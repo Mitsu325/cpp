@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 17:16:06 by pmitsuko          #+#    #+#              #
-#    Updated: 2023/03/19 18:50:46 by pmitsuko         ###   ########.fr        #
+#    Updated: 2023/03/19 18:57:42 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,5 +76,4 @@ re: fclean all
 run: re
 		$(VAL) ./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
 
-# $VAR="shuf -i 1-1000000 -r -n 3000 | tr '\n' ' '"
 .PHONY: all clean fclean re
