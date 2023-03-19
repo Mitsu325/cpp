@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:53:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 13:56:53 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:12:34 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,10 @@ void	BitcoinExchange::displayExchange(void)
 				std::cout << "Error: too large a number." << std::endl;
 				continue;
 			}
-			std::cout << date << " => " << bitcoin << " = " << std::endl;
+			std::map<std::string, float>::iterator it = this->_database.upper_bound(date);
+			if (it != this->_database.begin())
+				it--;
+			std::cout << date << " => " << bitcoin << " = " << (*it).second * bitcoin << std::endl;
 		}
 		else
 		{
@@ -155,10 +158,6 @@ void	BitcoinExchange::displayExchange(void)
 		}
 	}
 	fs_in.close();
-	// std::map<std::string, float>::iterator it;
-	// for (it = this->_database.begin(); it != this->_database.end(); ++it){
-	// 	std::cout << it->first << " => " << it->second << '\n';
-	// }
 	return ;
 }
 
