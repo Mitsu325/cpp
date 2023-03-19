@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:53:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:36:40 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 12:18:45 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	BitcoinExchange::checkFormat(std::string line, std::string delimiter, int n
 	return (count == num);
 }
 
-int	BitcoinExchange::loadDatabase(void)
+void	BitcoinExchange::loadDatabase(void)
 {
 	std::string		line, date, delimiter = ",";
 	std::fstream	fs_in;
@@ -85,7 +85,53 @@ int	BitcoinExchange::loadDatabase(void)
 			line.erase(0, pos + delimiter.length());
 			if (!strptime(date.c_str(), "%Y-%m-%d", &time_info))
 				continue;
-			_database[date] = static_cast<float>(atof(line.c_str()));
+			_database[date] = strtof(line.c_str(), NULL);
+		}
+	}
+	return ;
+}
+
+void	BitcoinExchange::displayExchange(void)
+{
+	std::string		line, date, value, delimiter = " | ";
+	std::fstream	fs_in;
+	float			bitcoin;
+	size_t			pos = 0;
+	tm				time_info;
+
+	fs_in.open(this->_file.c_str(), std::fstream::in);
+	if (!fs_in.is_open())
+	{
+		throw BitcoinExchange::BitcoinExchangeException("could not open file");
+	}
+	while (std::getline(fs_in, line))
+	{
+		if (this->checkFormat(line, delimiter, 1))
+		{
+			pos = line.find(delimiter);
+			date = line.substr(0, pos);
+			pos = pos + delimiter.length();
+			bitcoin = strtof(line.c_str() + pos, NULL);
+			if (!strptime(date.c_str(), "%Y-%m-%d", &time_info))
+			{
+				std::cout << "Error: invalid date => " << date << std::endl;
+				continue;
+			}
+			if (bitcoin < 0)
+			{
+				std::cout << "Error: not a positive number." << std::endl;
+				continue;
+			}
+			if (bitcoin > 1000)
+			{
+				std::cout << "Error: too large a number." << std::endl;
+				continue;
+			}
+			std::cout << date << " => " << bitcoin << " = " << std::endl;
+		}
+		else
+		{
+			std::cout << "Error: bad input => " << line << std::endl;
 		}
 	}
 	fs_in.close();
@@ -93,7 +139,7 @@ int	BitcoinExchange::loadDatabase(void)
 	// for (it = this->_database.begin(); it != this->_database.end(); ++it){
 	// 	std::cout << it->first << " => " << it->second << '\n';
 	// }
-	return (0);
+	return ;
 }
 
 std::string	BitcoinExchange::getFile(void) const

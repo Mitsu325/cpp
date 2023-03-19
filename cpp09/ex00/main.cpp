@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:38:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:27:16 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 12:05:13 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	btc(char *file)
 	try
 	{
 		BitcoinExchange bitcoinExchange(file);
+
+		bitcoinExchange.displayExchange();
 	}
 	catch(const std::exception& e)
 	{

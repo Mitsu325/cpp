@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:51:04 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 11:38:55 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:54:36 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 # include <string>
 # include <cstring>
+# include <cstdlib>
 # include <iostream>
 # include <fstream>
 # include <ctime>
 # include <stdexcept>
 # include <map>
-# include <stdlib.h>
 
 # define DATABASE_FILE "data.csv"
 
@@ -31,7 +31,7 @@ class BitcoinExchange
 		std::map<std::string, float>	_database;
 		std::string						_file;
 
-		int		loadDatabase(void);
+		void	loadDatabase(void);
 		bool	checkFormat(std::string line, std::string delimiter, int num);
 
 	public:
