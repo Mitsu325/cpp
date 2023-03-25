@@ -48,25 +48,13 @@ RPN&	RPN::operator=(RPN const &obj)
 
 bool	RPN::validateOperator(std::string token)
 {
-	return (token.size() == 1 &&
-			(token.at(0) == '+' || token.at(0) == '-' ||
+	return (token.size() < 3 && (token.at(0) == '+' || token.at(0) == '-' ||
 			token.at(0) == '*' || token.at(0) == '/'));
 }
 
 bool	RPN::validateNumber(std::string token)
 {
-	if (token.size() == 1 && std::isdigit(token.at(0)))
-	{
-		return (true);
-	}
-	else if (token.size() == 2)
-	{
-		if ((token.at(0) == '+' || token.at(0) == '-') && std::isdigit(token.at(1)))
-		{
-			return (true);
-		}
-	}
-	return (false);
+	return (token.size() == 1 && std::isdigit(token.at(0)));
 }
 
 void	RPN::calculate(const char* arithmetic_operator)
@@ -93,6 +81,8 @@ void	RPN::calculate(const char* arithmetic_operator)
 			this->_stack.push(a * b);
 			break;
 		case '/':
+			if (b == 0)
+				throw RPN::RPNException("Error: no result");
 			this->_stack.push(a / b);
 			break;
 		default:
@@ -104,12 +94,23 @@ void	RPN::compute(void)
 {
 	std::stringstream	buffer(this->_notation);
 	std::string			token;
+	std::string			temp;
 
+	if (!this->_notation.size())
+		return;
 	while (buffer >> token)
 	{
 		if (this->validateOperator(token))
 		{
 			this->calculate(token.c_str());
+			if (token.size() == 2)
+			{
+				temp = token.at(1);
+				if (this->validateNumber(temp))
+					this->_stack.push(atoi(temp.c_str()));
+				else
+					throw RPN::RPNException("Error: invalid expression");
+			}
 		}
 		else if (this->validateNumber(token))
 		{
@@ -120,7 +121,11 @@ void	RPN::compute(void)
 			throw RPN::RPNException("Error: invalid expression");
 		}
 	}
-	std::cout << this->_stack.top() << std::endl;
+	while (!this->_stack.empty())
+	{
+		std::cout << this->_stack.top() << std::endl;
+		this->_stack.pop();
+	}
 	return ;
 }
 
