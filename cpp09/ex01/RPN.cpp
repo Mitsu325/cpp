@@ -6,13 +6,13 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 17:32:01 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 18:46:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:41:32 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-RPN::RPN(void)
+RPN::RPN(void): _notation(NULL)
 {
 	std::cout << "RPN default constructor called" << std::endl;
 	return ;
