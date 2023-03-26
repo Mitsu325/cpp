@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:14:49 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/26 13:14:18 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:36:10 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ PmergeMe::PmergeMe(void)
 PmergeMe::PmergeMe(char** argv)
 {
 	std::cout << "PmergeMe constructor called" << std::endl;
-	this->initVector(argv);
+	this->initContainers(argv);
 	return ;
 }
 
@@ -42,6 +42,8 @@ PmergeMe&	PmergeMe::operator=(PmergeMe const &obj)
 {
 	if (this != &obj)
 	{
+		this->_vector = obj._vector;
+		this->_deque = obj._deque;
 	}
 	return (*this);
 }
@@ -52,7 +54,7 @@ bool	PmergeMe::isNumber(std::string &str)
 		str.find_first_not_of("0123456789") == std::string::npos);
 }
 
-void	PmergeMe::initVector(char** argv)
+void	PmergeMe::initContainers(char** argv)
 {
 	std::string			str, token;
 	int					num;
@@ -71,6 +73,7 @@ void	PmergeMe::initVector(char** argv)
 					throw PmergeMe::PmergeMeException("Error: invalid range number");
 				}
 				this->_vector.push_back(num);
+				this->_deque.push_back(num);
 			}
 			else
 			{
@@ -81,98 +84,30 @@ void	PmergeMe::initVector(char** argv)
 	return ;
 }
 
-void	PmergeMe::insertSort(int start_pos, int end_pos)
-{
-	int	i, temp;
-
-	for (int j = start_pos + 1; j < end_pos; j++)
-	{
-		temp = this->_vector[j];
-		i = j - 1;
-		while (i >= start_pos && this->_vector[i] > temp)
-		{
-			this->_vector[i + 1] = this->_vector[i];
-			i--;
-		}
-		this->_vector[i + 1] = temp;
-	}
-}
-
-void	PmergeMe::mergeSort(int start_pos, int middle_pos, int end_pos)
-{
-	std::vector<int>	temp;
-	int					temp_idx = start_pos;
-	int					left_idx = start_pos;
-	int					right_idx = middle_pos + 1;
-
-	while ((left_idx <= middle_pos) && (right_idx <= end_pos))
-	{
-		if (this->_vector[left_idx] < this->_vector[right_idx])
-		{
-			temp[temp_idx] = this->_vector[left_idx];
-			left_idx++;
-		}
-		else
-		{
-			temp[temp_idx] = this->_vector[right_idx];
-			right_idx++;
-		}
-		temp_idx++;
-	}
-	for (; left_idx <= middle_pos; left_idx++, temp_idx++)
-	{
-		temp[temp_idx] = this->_vector[left_idx];
-	}
-	for (; right_idx <= end_pos; right_idx++, temp_idx++)
-	{
-		temp[temp_idx] = this->_vector[right_idx];
-	}
-	for (int i = start_pos; i <= end_pos; i++)
-	{
-		this->_vector[i] = temp[i];
-	}
-}
-
-void	PmergeMe::mergeInsertSort(int start_pos, int end_pos)
-{
-	int	middle_pos;
-
-	if (start_pos - end_pos > LIMIT)
-	{
-		middle_pos = (start_pos + end_pos) / 2;
-		mergeInsertSort(start_pos, middle_pos);
-		mergeInsertSort(middle_pos + 1, end_pos);
-		mergeSort(start_pos, middle_pos, end_pos);
-	}
-	else
-		insertSort(start_pos, end_pos);
-}
-
 void	PmergeMe::execute(void)
 {
-	std::vector<int>::iterator	iter;
 	std::clock_t				start, end;
-	double						elapsed_time;
+	double						vec_elapsed_time, deque_elapsed_time;
 
 	std::cout << std::left << std::setw(10) << "Before: ";
-	for (iter = this->_vector.begin(); iter != this->_vector.end(); ++iter) {
-		std::cout << *iter << " ";
-	}
-	std::cout << std::endl;
+	this->print(this->_vector);
+	start = std::clock();
+	mergeInsertSort(this->_vector, 0, this->_vector.size());
+	end = std::clock();
+	vec_elapsed_time = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000);
+	std::cout << std::left << std::setw(10) << "After: ";
+	this->print(this->_vector);
 
 	start = std::clock();
-	mergeInsertSort(0, this->_vector.size());
+	mergeInsertSort(this->_deque, 0, this->_deque.size());
 	end = std::clock();
-	elapsed_time = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000);
-
-	std::cout << std::left << std::setw(10) << "After: ";
-	for (iter = this->_vector.begin(); iter != this->_vector.end(); ++iter) {
-		std::cout << *iter << " ";
-	}
-	std::cout << std::endl;
+	deque_elapsed_time = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000);
 
 	std::cout << "Time to process a range of " << this->_vector.size();
-	std::cout << " elements with std::vector : " << elapsed_time << " ms";
+	std::cout << " elements with std::vector : " << vec_elapsed_time << " ms";
+	std::cout << std::endl;
+	std::cout << "Time to process a range of " << this->_deque.size();
+	std::cout << " elements with std::deque : " << deque_elapsed_time << " ms";
 	std::cout << std::endl;
 }
 
