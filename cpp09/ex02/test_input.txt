@@ -1,0 +1,7 @@
+$> ./PmergeMe
+$> ./PmergeMe 3 5 9 7 4
+$> ./PmergeMe "-1" "2"
+$> ./PmergeMe "3 5 1 10 900" 2 8 1 9 0 "12 20 60 25 50 40"
+$> ./PmergeMe 3 5 2147483647 9 7 4
+$> ./PmergeMe 3 5 2147483648 9 7 4
+$> ./PmergeMe `shuf -i 1-1000000 -r -n 3000 | tr "\n" " "`
