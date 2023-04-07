@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:53:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2023/03/19 16:23:53 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2023/04/07 10:43:20 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	BitcoinExchange::displayExchange(void)
 	{
 		throw BitcoinExchange::BitcoinExchangeException("could not open file");
 	}
+	std::getline(fs_in, line);
 	while (std::getline(fs_in, line))
 	{
 		if (this->checkFormat(line, delimiter, 1))
